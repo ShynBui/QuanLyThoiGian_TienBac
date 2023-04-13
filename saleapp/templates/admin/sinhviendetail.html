@@ -1,0 +1,68 @@
+{% extends 'admin/base.html'%}
+
+{% block body %}
+
+<h1 class="text-center text-danger">Trang View</h1>
+<br>
+<h1>Nhân viên: {{user.name}}</h1>
+
+
+<div class="ml-1 row">
+
+    <br>
+
+    <form class="d-flex justify-content-between">
+        <div class="form-group">
+            <input type="text" class="form-control" name="value" placeholder="Nhập MSSV...">
+            <input type="submit" value="Tìm" class="btn btn-info">
+        </div>
+    </form>
+
+    <br>
+</div>
+
+<table class = "table table-light table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                MSSV
+            </th>
+            <th>
+                Tên
+            </th>
+            <th>
+                Lớp
+            </th>
+            <th>
+                Ngành
+            </th>
+            <th>
+                GPA
+            </th>
+            <th>
+                Diểm rèn luyện
+            </th>
+            <th>
+                Go
+            </th>
+        </tr>
+    </thead>
+    {% for c in student %}
+    <tr id = "room{{c.id}}">
+        <td>{{c.maSo}}</td>
+        <td>{{c.name}}</td>
+        <td>{{c.tenlop}}</td>
+        <td>{{c.nganh}}</td>
+        <td>{{c.gpa}}</td>
+        <td>{{c.diemRL}}</td>
+        <td>
+            <a href="{{url_for('profile', profile_id= c.maSo)}}">
+                Go to {{c.name}} profile
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{%endblock%}

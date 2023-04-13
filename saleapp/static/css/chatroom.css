@@ -1,0 +1,248 @@
+html,body{
+    width:100%;
+    height:100%;
+}
+html{
+    overflow:hidden;
+}
+body{
+  background-image: url(https://www.bayviet.com.vn/wp-content/uploads/2018/04/background-bay-viet-2-1.jpg)
+
+
+}
+.main{
+width:80%;
+height: 91%;
+margin: 0 auto;
+};
+.boxed{
+    width: 0;
+    height: 0;
+
+
+    border-top:18px solid #ebb3d0 ;
+    border-left:10px solid transparent; ;
+    border-right:10px solid transparent;
+    border-bottom:10px solid transparent ;
+    position: absolute;
+
+
+    right: 17px;
+    bottom: -28px;
+}
+.container{
+
+
+    width: 100%;
+    height: 80%;
+
+
+}
+.header__chat{
+
+
+    height:8%;
+    width: 100%;
+    background-color:#fff;
+
+    border-color: #cfcfcf;
+
+
+
+
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.header__chat > h1{
+
+
+    width: 90%;
+
+
+}
+.icon__header{
+   color:#0084ff;
+    display:flex;
+    width: 10%;
+    justify-content: space-around;
+}
+.mid__chat{
+background-color:#ffff;
+overflow-y:scroll;
+ height: calc(100% - 11%) !important;
+padding:10px;
+
+
+
+ border-color: #cfcfcf;
+}
+.bot__chat{
+    padding-left:10px;
+    height:7%;
+   background-color:#ffffff;
+
+
+     border-right: 1px solid;
+    border-bottom: 1px solid;
+border-left: 1px solid;
+ border-color: #cfcfcf;
+
+    display:flex;
+    align-items:center;
+}
+.other__text{
+padding: 10px;
+    background: #e4e6eb;
+    overflow: auto;
+    border-radius: 10px 15px;
+    }
+.my__text{
+    background-color: #0084ff;
+    color: white;
+    padding: 10px;
+    margin-left: 5px;
+     border-radius: 10px 15px;
+}
+#messages{
+   text-align: center;
+}
+b::before{
+    font:size:20px;
+}
+#message_input_form{
+    width:100%;
+
+    display:flex;
+    align-items: center;
+
+    justify-content: center;
+}
+#message_input{
+    width:45%;
+        border-radius: 12px;
+    background-color: #f3f3f5;
+    padding: 12px 17px 14px 21px;
+    border: unset;
+}
+#submit{
+ color:#0084ff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: unset;
+    background-color: unset;
+}
+#submit:hover{
+    background-color: #f3f3f5;
+}
+input:focus{
+outline:0}
+.emoji{
+
+    position:relative;
+}
+.emoji:hover{
+    cursor:pointer
+}
+.emoji{
+    color: #0084ff;
+}
+.album_emoji{
+    position: absolute;
+    box-shadow:-4px 4px 12px 7px #d7d5d5;
+
+    right: -13px;
+    background: #fff;
+    top:-160px;
+    width: 200px;
+    flex-wrap : wrap;
+    display:none;
+       border-radius: 7px;
+    padding: 3px;
+
+
+}
+.album_emoji p{
+    font-size:20px;
+}
+/*.emoji:hover .album_emoji{
+    display:flex;
+}*/
+p:hover{
+    cursor:pointer;
+}
+@media only screen and (min-width: 1023px){
+    .header__chat{
+            height: 11%;
+    width: 100%;
+    background-color: #fff;
+
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    }
+
+    .mid__chat{
+            background-color: #ffff;
+    overflow-y: scroll;
+    height: 75%;
+    padding: 10px;
+
+    border-color: #cfcfcf;
+    }
+    .bot__chat{
+            height: 12%;
+    }
+}
+.container{
+    margin-top:0;
+    margin-bottom:0;
+    padding:0;
+     height: calc(100% - 87px) !important;
+
+}
+.sub__dot{
+    position: relative;
+}
+.change__color{
+    position: absolute;
+    display:flex;
+
+    border-radius: 5px;
+    display:none;
+    bottom: 31px;
+    right: -14px;
+    background: white;
+}
+.change__color--white{
+    margin-right:10px;
+}
+.change__color:hover{
+    cursor:pointer;
+}
+.sub__dot:hover .change__color{
+    display:flex;
+}
+.change__color--sub{
+
+    position: absolute;
+    bottom: -19px;
+    left: 23px;
+    width: 0;
+    height: 0;
+    border-top:10px solid #f4f4f4;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+.change__color > h1{
+    font-size: 14px;
+}
+.color__black{
+    color:white;
+    background-color: #000000;
+}
+.other__text--color{
+    background: #303030;
+}
