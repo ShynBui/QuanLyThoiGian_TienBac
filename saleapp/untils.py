@@ -26,13 +26,11 @@ def add_user(name, username, password, diachi, **kwargs):
 
     print(maso)
 
-    sinhvien = SinhVien(idLop=1)
-    db.session.add(sinhvien)
     db.session.commit()
 
     user = User(name=name.strip(), username=username, password=password, diachi=diachi,
-                email=kwargs.get('email'), avatar=kwargs.get('avatar'), maSo=maso, userRole=UserRole.SINHVIEN,
-                idPerson=sinhvien.id, dob=kwargs.get('dob'))
+                email=kwargs.get('email'), avatar=kwargs.get('avatar'), maSo=maso, userRole=UserRole.USER,
+                dob=kwargs.get('dob'))
 
     # user1 = User(name="Bùi Tiến Phát", maSo="2051052096", username="2051052096phat@ou.edu.vn",
     #              password=password, email="2051052096phat@ou.edu.vn", joined_date=datetime.now(),
@@ -105,7 +103,7 @@ def change_room_status(id, change):
     db.session.commit()
 
 
-def check_login(username, password, role=UserRole.SINHVIEN):
+def check_login(username, password, role=UserRole.USER):
     if username and password:
         password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
 
@@ -120,7 +118,7 @@ def check_admin_login(username, password):
 
         return User.query.filter(User.username.__eq__(username),
                                  User.password.__eq__(password),
-                                 User.userRole != UserRole.SINHVIEN).first()
+                                 User.userRole != UserRole.USER).first()
 
 
 def get_unreply_room():

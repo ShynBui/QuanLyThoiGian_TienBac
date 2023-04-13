@@ -12,10 +12,9 @@ class BaseModel(db.Model):
 
 
 class UserRole(UserEnum):
-    SINHVIEN = 1
-    GIANGVIEN = 2
-    NHANVIEN = 3
-    SYSADMIN = 4
+    USER = 1
+    SYSADMIN = 2
+    ADMIN = 3
 
 class User(BaseModel, UserMixin):
     __tablename__ = 'user'
@@ -29,7 +28,7 @@ class User(BaseModel, UserMixin):
     is_active = Column(Boolean, default=True)
     joined_date = Column(DateTime, default=datetime.now())
     diachi = Column(String(100), nullable=False)
-    userRole = Column(Enum(UserRole), default=UserRole.SINHVIEN)
+    userRole = Column(Enum(UserRole), default=UserRole.USER)
     sdt = Column(String(50), default="123456789")
     queQuan = Column(String(50), default="TP.HCM")
     sex = Column(Boolean, default=True)
@@ -192,7 +191,26 @@ class TaiKhoanChiTieu(db.Model):
 if __name__ == '__main__':
     with app.app_context():
 
+
         db.drop_all()
         db.create_all()
+        db.session.commit()
+        password = str(hashlib.md5('1'.encode('utf-8')).hexdigest())
 
+        room = Room(name='ccv', is_reply=False, date=datetime.now())
+        db.session.add_all([room])
+        db.session.commit()
+        taiKhoan = TaiKhoan()
+        db.session.add_all([taiKhoan])
+        db.session.commit()
+        user = User(name="Bui Tien Hoang", username="u1",
+                         password=password, avatar='https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/191455455_1236939360069997_5418463114445577817_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=rcajabo0f74AX9qvH8y&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfBoXfETYQ2MJIS8cYaTUQDAix3LXAwX2UK0Vz-P8P1M1w&oe=645FD60B',
+                         email="20512052047hoang@ou.edu.vn", joined_date=datetime.now(),
+                         diachi="Gò Vấp", queQuan='Dong Lak', facebook='https://www.facebook.com/d8.ndh',
+                         dob=datetime.strptime("22-06-1990", '%d-%m-%Y').date(), sex=0, userRole=UserRole.SYSADMIN, idtaikhoan=taiKhoan.id)
+        db.session.add_all([user])
+        db.session.commit()
+        message = Message(room_id=room.id, user_id=user.id, content='', date=datetime.now())
+        db.session.add_all([message])
+        db.session.commit()
         db.session.commit()

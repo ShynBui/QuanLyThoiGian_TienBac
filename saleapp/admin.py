@@ -12,7 +12,7 @@ from datetime import datetime
 class AuthenticatedModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated and \
-            (current_user.userRole == UserRole.NHANVIEN or current_user.userRole == UserRole.SYSADMIN)
+            (current_user.userRole == UserRole.ADMIN or current_user.userRole == UserRole.SYSADMIN)
 
 
 class LogoutView(BaseView):
@@ -35,7 +35,7 @@ class ChatAdmin(BaseView):
 
     def is_accessible(self):
         return current_user.is_authenticated and \
-            (current_user.userRole == UserRole.NHANVIEN or current_user.userRole == UserRole.SYSADMIN)
+            (current_user.userRole == UserRole.ADMIN or current_user.userRole == UserRole.SYSADMIN)
 
 class Stat(BaseView):
     @expose('/')
@@ -44,7 +44,7 @@ class Stat(BaseView):
 
     def is_accessible(self):
         return current_user.is_authenticated and \
-            (current_user.userRole == UserRole.NHANVIEN or current_user.userRole == UserRole.SYSADMIN)
+            (current_user.userRole == UserRole.ADMIN or current_user.userRole == UserRole.SYSADMIN)
 
 class MyAdminIndex(AdminIndexView):
     @expose('/')
@@ -65,7 +65,7 @@ class ViewUserDetail(BaseView):
         return self.render('admin/sinhviendetail.html', student=student, user=untils.get_user_by_id(current_user.id))
     def is_accessible(self):
         return current_user.is_authenticated and \
-            (current_user.userRole == UserRole.NHANVIEN or current_user.userRole == UserRole.SYSADMIN)
+            (current_user.userRole == UserRole.ADMIN or current_user.userRole == UserRole.SYSADMIN)
 
 
 admin = Admin(app=app, name='QUẢN TRỊ MÁY BAY', template_mode='bootstrap4',

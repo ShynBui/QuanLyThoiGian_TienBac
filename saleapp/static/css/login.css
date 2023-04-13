@@ -1,22 +1,33 @@
-.btn-color{
-  background-color: #0e1c36;
-  color: #fff;
+<!-- CSS -->
 
-}
+    body {
+        background-color: #f2f2f2;
+    }
 
-.profile-image-pic{
-  height: 200px;
-  width: 200px;
-  object-fit: cover;
-}
+    .card {
+        border-radius: 20px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    }
 
+    .profile-image-pic {
+        border: 5px solid #fff;
+    }
 
+    .form-control:focus {
+        border-color: #e68a00;
+        box-shadow: none;
+    }
 
-.cardbody-color{
-  background-color: #ebf2fa;
-}
+    .btn-color {
+        background-color: #e68a00;
+        border-color: #e68a00;
+    }
+
+    .btn-color:hover {
+        background-color: #d17100;
+        border-color: #d17100;
+    }
 
 a{
   text-decoration: none;
 }
-

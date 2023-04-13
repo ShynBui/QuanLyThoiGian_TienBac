@@ -55,39 +55,9 @@ def chat_room():
         return redirect(url_for('home'))
 
 
-@app.route('/delete_user', methods=['POST', 'get'])
-def delete_user():
-    untils.delete_user(data['profile_id'])
-
-    return redirect('/admin/viewuserdetail/')
-
-
-@app.route('/change_profile', methods=['POST', 'get'])
-def change_profile():
-    profile_id = data['profile_id']
-    data['profile_id'] = profile_id
-
-    name = request.form.get("name")
-    dob = request.form.get('dob')
-    sex = request.form.get('sex')
-    khoa = request.form.get('khoa')
-    nganh = request.form.get('nganh')
-    lop = request.form.get('class')
-    email = request.form.get('email')
-    phone = request.form.get('phone')
-    khoahoc = request.form.get('khoahoc')
-    diachi = request.form.get('diachi')
-    diemrl = request.form.get('diemrl')
-
-    # print(name, dob, sex, khoa, nganh, lop, email, phone, khoahoc, diachi)
-
-    untils.change_profile(data['profile_id'], name, dob, sex, email, phone, diachi, diemrl)
-
-    return redirect(url_for('profile', profile_id=data['profile_id']))
-
 @app.route("/admin/chatadmin/<int:room_id>")
 def chat_room_admin(room_id):
-    if current_user.userRole == UserRole.SYSADMIN or current_user.userRole == UserRole.NHANVIEN:
+    if current_user.userRole == UserRole.SYSADMIN or current_user.userRole == UserRole.ADMIN:
         print(room_id)
         user_name = current_user.name
         room = untils.get_chatroom_by_room_id(id=room_id)
@@ -132,10 +102,10 @@ def handle_save_message_event(data):
 
     untils.save_chat_message(room_id=int(data['room']), message=data['message'], user_id=current_user.id)
 
-    if (current_user.userRole == UserRole.SYSADMIN or current_user.userRole == UserRole.NHANVIEN):
+    if (current_user.userRole == UserRole.SYSADMIN or current_user.userRole == UserRole.ADMIN):
         untils.change_room_status(data['room'], 1)
 
-    if (current_user.userRole == UserRole.SINHVIEN):
+    if (current_user.userRole == UserRole.USER):
         untils.change_room_status(data['room'], 0)
 
 
