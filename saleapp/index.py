@@ -14,7 +14,6 @@ import openpyxl
 def home():
     return render_template('index.html')
 
-
 # socket
 @app.route("/chatroom")
 def chat_room():
