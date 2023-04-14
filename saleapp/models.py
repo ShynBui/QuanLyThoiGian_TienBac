@@ -197,6 +197,76 @@ if __name__ == '__main__':
         db.session.commit()
         password = str(hashlib.md5('1'.encode('utf-8')).hexdigest())
 
+        #Nhom chi tieu
+        nhom1 = NhomChiTieu(name="Chi tiêu hàng tháng",isGain=False)
+        nhom2 = NhomChiTieu(name="Chi tiêu cần thiết", isGain=False)
+        nhom3 = NhomChiTieu(name="Vui chơi giải trí", isGain=False)
+        nhom5 = NhomChiTieu(name="Nợ", isGain=False)
+        nhom6 = NhomChiTieu(name="Khoản thu", isGain=False)
+
+        db.session.add_all([nhom1,nhom2,nhom3,nhom5, nhom6])
+        db.session.commit()
+
+        #Loai chi tieu
+        #nhom2
+        loai1 = LoaiChiTieu(name="Sửa nhà", idnhomchitieu=nhom2.id)
+        loai2 = LoaiChiTieu(name="Bảo dưỡng xe", idnhomchitieu=nhom2.id)
+        loai3 = LoaiChiTieu(name="Khám sức khỏe", idnhomchitieu=nhom2.id)
+        loai4 = LoaiChiTieu(name="Bảo hiểm", idnhomchitieu=nhom2.id)
+        loai5 = LoaiChiTieu(name="Giáo dục", idnhomchitieu=nhom2.id)
+        loai6 = LoaiChiTieu(name="Đồ gia dụng", idnhomchitieu=nhom2.id)
+        loai7 = LoaiChiTieu(name="Đồ dùng cá nhân", idnhomchitieu=nhom2.id)
+        loai8 = LoaiChiTieu(name="Vật nuôi", idnhomchitieu=nhom2.id)
+        loai9 = LoaiChiTieu(name="Dịch vụ gia đình", idnhomchitieu=nhom2.id)
+        loai10 = LoaiChiTieu(name="Chi phí khác", idnhomchitieu=nhom2.id)
+
+        db.session.add_all([loai1,loai2,loai3,loai4,loai5,loai6,loai7,loai8,loai9, loai10])
+        db.session.commit()
+
+        # Loai chi tieu
+        # nhom1
+        loai1 = LoaiChiTieu(name="Ăn uống", idnhomchitieu=nhom1.id)
+        loai2 = LoaiChiTieu(name="Thuê nhà", idnhomchitieu=nhom1.id)
+        loai3 = LoaiChiTieu(name="Hóa đơn nước", idnhomchitieu=nhom1.id)
+        loai4 = LoaiChiTieu(name="Hóa đơn điện thoại", idnhomchitieu=nhom1.id)
+        loai5 = LoaiChiTieu(name="Hóa đơn điện", idnhomchitieu=nhom1.id)
+        loai6 = LoaiChiTieu(name="Hóa đơn gas", idnhomchitieu=nhom1.id)
+        loai7 = LoaiChiTieu(name="Hóa đơn TV", idnhomchitieu=nhom1.id)
+        loai8 = LoaiChiTieu(name="Hóa đơn Internet", idnhomchitieu=nhom1.id)
+        loai9 = LoaiChiTieu(name="Hóa đơn khác", idnhomchitieu=nhom1.id)
+
+        db.session.add_all([loai1, loai2, loai3, loai4, loai5, loai6, loai7, loai8, loai9])
+        db.session.commit()
+
+
+        # Loai chi tieu
+        # nhom3
+        loai1 = LoaiChiTieu(name="Thể dục thể thao", idnhomchitieu=nhom3.id)
+        loai2 = LoaiChiTieu(name="Làm đẹp", idnhomchitieu=nhom3.id)
+        loai3 = LoaiChiTieu(name="Quà tặng và quyên góp", idnhomchitieu=nhom3.id)
+        loai4 = LoaiChiTieu(name="Dịch vụ trực tuyến", idnhomchitieu=nhom3.id)
+        loai5 = LoaiChiTieu(name="Vui - chơi", idnhomchitieu=nhom3.id)
+
+        db.session.add_all([loai1, loai2, loai3, loai4, loai5])
+        db.session.commit()
+
+        # Loai chi tieu
+        # nhom5 Nợ
+        loai1 = LoaiChiTieu(name="Trả nợ", idnhomchitieu=nhom5.id)
+        loai2 = LoaiChiTieu(name="Trả lãi", idnhomchitieu=nhom5.id)
+
+        db.session.add_all([loai1, loai2])
+        db.session.commit()
+
+        # Loai chi tieu
+        # nhom6 Nợ
+        loai1 = LoaiChiTieu(name="Lương", idnhomchitieu=nhom6.id)
+        loai2 = LoaiChiTieu(name="Thu nhập khác", idnhomchitieu=nhom6.id)
+
+        db.session.add_all([loai1, loai2])
+        db.session.commit()
+
+
         #admin
         #tk: u1
         #mk: 1
@@ -238,4 +308,6 @@ if __name__ == '__main__':
         message2 = Message(room_id=room2.id, user_id=user2.id, content='', date=datetime.now())
         db.session.add_all([message2])
         db.session.commit()
+
+
         db.session.commit()
