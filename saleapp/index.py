@@ -202,6 +202,11 @@ def user_signout():
 def user_load(user_id):
     return untils.get_user_by_id(user_id=user_id)
 
+@app.route('/taichinh')
+def taichinh():
+
+    return render_template('taichinh.html')
+#Tài khoản
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
