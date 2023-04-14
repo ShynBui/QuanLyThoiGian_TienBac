@@ -353,6 +353,23 @@ def giaodich():
 def chitieuhangthang():
     return render_template('chitieuhangthang.html')
 
+@app.route("/profile", methods=['post', 'get'])
+def profile_user():
+
+    profile = untils.get_user_by_id(current_user.id)
+
+    hoten = profile.name.split(" ")
+
+    ho = hoten[0]
+    ten = ''
+    for i in range(1, len(hoten)):
+        ten = ten + " " + hoten[i]
+
+    taikhoan = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan)
+
+    return render_template('profile.html', profile=profile, ten=ten[1:], ho=ho, taikhoan=taikhoan)
+
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
