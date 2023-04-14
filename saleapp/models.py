@@ -160,6 +160,7 @@ class LoaiChiTieu(db.Model):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False)
+    image = Column(Text)
     idnhomchitieu = Column(Integer, ForeignKey(NhomChiTieu.id), nullable=False, primary_key=True)
     khoanchitieu = relationship('KhoanChiTieu', backref='loaichitieu', lazy=True)
     def __str__(self):
@@ -211,31 +212,31 @@ if __name__ == '__main__':
 
         #Loai chi tieu
         #nhom2
-        loai1 = LoaiChiTieu(name="Sửa nhà", idnhomchitieu=nhom2.id)
-        loai2 = LoaiChiTieu(name="Bảo dưỡng xe", idnhomchitieu=nhom2.id)
-        loai3 = LoaiChiTieu(name="Khám sức khỏe", idnhomchitieu=nhom2.id)
-        loai4 = LoaiChiTieu(name="Bảo hiểm", idnhomchitieu=nhom2.id)
-        loai5 = LoaiChiTieu(name="Giáo dục", idnhomchitieu=nhom2.id)
-        loai6 = LoaiChiTieu(name="Đồ gia dụng", idnhomchitieu=nhom2.id)
-        loai7 = LoaiChiTieu(name="Đồ dùng cá nhân", idnhomchitieu=nhom2.id)
-        loai8 = LoaiChiTieu(name="Vật nuôi", idnhomchitieu=nhom2.id)
-        loai9 = LoaiChiTieu(name="Dịch vụ gia đình", idnhomchitieu=nhom2.id)
-        loai10 = LoaiChiTieu(name="Chi phí khác", idnhomchitieu=nhom2.id)
+        loai1 = LoaiChiTieu(name="Sửa nhà", idnhomchitieu=nhom2.id, image="https://xaynhangaviet.com/wp-content/uploads/2022/09/icon-sua-nha.png")
+        loai2 = LoaiChiTieu(name="Bảo dưỡng xe", idnhomchitieu=nhom2.id, image="https://media.istockphoto.com/id/1215271982/vi/vec-to/bi%E1%BB%83u-t%C6%B0%E1%BB%A3ng-b%E1%BA%A3o-d%C6%B0%E1%BB%A1ng-xe-h%C6%A1i.jpg?s=1024x1024&w=is&k=20&c=LnAN5rqTkFQlJ_Mslj_f-Hpzjj5rTrG3gPl45upV0K8=")
+        loai3 = LoaiChiTieu(name="Khám sức khỏe", idnhomchitieu=nhom2.id, image="https://vieclam123.vn/ckfinder/userfiles/images/images/mot-so-luu-y-khi-kham-suc-khoe-tai-vien-198.jpg")
+        loai4 = LoaiChiTieu(name="Bảo hiểm", idnhomchitieu=nhom2.id, image="https://banner2.cleanpng.com/20180411/euw/kisspng-health-insurance-health-care-whole-5ace87e407a9a8.7638984515234846440314.jpg")
+        loai5 = LoaiChiTieu(name="Giáo dục", idnhomchitieu=nhom2.id, image="https://www.shutterstock.com/image-vector/graduation-icon-260nw-696419326.jpg")
+        loai6 = LoaiChiTieu(name="Đồ gia dụng", idnhomchitieu=nhom2.id, image="https://chatuchak.vn/image/cache/catalog/new/icon-dung-cu-lam-bep-200x200.png")
+        loai7 = LoaiChiTieu(name="Đồ dùng cá nhân", idnhomchitieu=nhom2.id, image="https://img.lovepik.com/element/40154/8917.png_860.png")
+        loai8 = LoaiChiTieu(name="Vật nuôi", idnhomchitieu=nhom2.id, image="https://png.pngtree.com/template/20191108/ourlarge/pngtree-love-cute-dog-pets-logo-icon-image_327863.jpg")
+        loai9 = LoaiChiTieu(name="Dịch vụ gia đình", idnhomchitieu=nhom2.id, image="https://med247.vn/wp-content/uploads/2022/03/icon_tham-kham-tai-nha.png")
+        loai10 = LoaiChiTieu(name="Chi phí khác", idnhomchitieu=nhom2.id, image="https://www.tsg.net.vn/wp-content/uploads/2016/03/icon-chi-phi-750x460.png")
 
         db.session.add_all([loai1,loai2,loai3,loai4,loai5,loai6,loai7,loai8,loai9, loai10])
         db.session.commit()
 
         # Loai chi tieu
         # nhom1
-        loai1 = LoaiChiTieu(name="Ăn uống", idnhomchitieu=nhom1.id)
-        loai2 = LoaiChiTieu(name="Thuê nhà", idnhomchitieu=nhom1.id)
-        loai3 = LoaiChiTieu(name="Hóa đơn nước", idnhomchitieu=nhom1.id)
-        loai4 = LoaiChiTieu(name="Hóa đơn điện thoại", idnhomchitieu=nhom1.id)
-        loai5 = LoaiChiTieu(name="Hóa đơn điện", idnhomchitieu=nhom1.id)
-        loai6 = LoaiChiTieu(name="Hóa đơn gas", idnhomchitieu=nhom1.id)
-        loai7 = LoaiChiTieu(name="Hóa đơn TV", idnhomchitieu=nhom1.id)
-        loai8 = LoaiChiTieu(name="Hóa đơn Internet", idnhomchitieu=nhom1.id)
-        loai9 = LoaiChiTieu(name="Hóa đơn khác", idnhomchitieu=nhom1.id)
+        loai1 = LoaiChiTieu(name="Ăn uống", idnhomchitieu=nhom1.id, image="https://img.pikbest.com/png-images/qiantu/vector-icon-hand-drawn-cartoon-catering-icon_2688650.png!w700wp")
+        loai2 = LoaiChiTieu(name="Thuê nhà", idnhomchitieu=nhom1.id, image="https://media.istockphoto.com/id/1130481222/vi/vec-to/bi%E1%BB%83u-t%C6%B0%E1%BB%A3ng-thu%C3%AA-nh%C3%A0-tr%C3%AAn-n%E1%BB%81n-tr%E1%BA%AFng.jpg?s=612x612&w=is&k=20&c=nGNhiEt3-HblTrUTVfHoqDIFSH35AQAOSeQMZQG-hMM=")
+        loai3 = LoaiChiTieu(name="Hóa đơn nước", idnhomchitieu=nhom1.id, image="https://banner2.cleanpng.com/20180702/hcp/kisspng-telegram-logo-computer-icons-foreign-water-5b3a4b6de4bb03.3372467615305470539369.jpg")
+        loai4 = LoaiChiTieu(name="Hóa đơn điện thoại", idnhomchitieu=nhom1.id, image="https://www.pngkit.com/png/detail/22-220966_phone-icon-png-red-icon-in-thoi-png.png")
+        loai5 = LoaiChiTieu(name="Hóa đơn điện", idnhomchitieu=nhom1.id, image="https://illin.vn/upload/h%C3%B3a%20%C4%91%C6%A1n_-11-04-2019-12-24-05.png")
+        loai6 = LoaiChiTieu(name="Hóa đơn gas", idnhomchitieu=nhom1.id, image="https://cdn-icons-png.flaticon.com/512/234/234793.png")
+        loai7 = LoaiChiTieu(name="Hóa đơn TV", idnhomchitieu=nhom1.id, image="https://png.pngtree.com/png-clipart/20190516/original/pngtree-tv-icon-png-image_3568212.jpg")
+        loai8 = LoaiChiTieu(name="Hóa đơn Internet", idnhomchitieu=nhom1.id, image="https://cdn-icons-png.flaticon.com/512/364/364089.png")
+        loai9 = LoaiChiTieu(name="Hóa đơn khác", idnhomchitieu=nhom1.id, image="https://timviec365.vn/pictures/news/2019/09/04/czp1567559203.jpg")
 
         db.session.add_all([loai1, loai2, loai3, loai4, loai5, loai6, loai7, loai8, loai9])
         db.session.commit()
@@ -243,27 +244,27 @@ if __name__ == '__main__':
 
         # Loai chi tieu
         # nhom3
-        loai1 = LoaiChiTieu(name="Thể dục thể thao", idnhomchitieu=nhom3.id)
-        loai2 = LoaiChiTieu(name="Làm đẹp", idnhomchitieu=nhom3.id)
-        loai3 = LoaiChiTieu(name="Quà tặng và quyên góp", idnhomchitieu=nhom3.id)
-        loai4 = LoaiChiTieu(name="Dịch vụ trực tuyến", idnhomchitieu=nhom3.id)
-        loai5 = LoaiChiTieu(name="Vui - chơi", idnhomchitieu=nhom3.id)
+        loai1 = LoaiChiTieu(name="Thể dục thể thao", idnhomchitieu=nhom3.id, image="https://img.lovepik.com/original_origin_pic/18/07/04/56174f903b65b242d5ecf9f0f06dec82.png_wh860.png")
+        loai2 = LoaiChiTieu(name="Làm đẹp", idnhomchitieu=nhom3.id, image="https://png.pngtree.com/png-vector/20201224/ourlarge/pngtree-beauty-skin-care-icon-vector-png-image_2589305.jpg")
+        loai3 = LoaiChiTieu(name="Quà tặng và quyên góp", idnhomchitieu=nhom3.id, image="https://png.pngtree.com/png-vector/20201109/ourmid/pngtree-gift-box-icon-design-template-illustration-png-image_2413411.jpg")
+        loai4 = LoaiChiTieu(name="Dịch vụ trực tuyến", idnhomchitieu=nhom3.id, image="https://media.istockphoto.com/id/1144489611/vi/vec-to/hotline-icon-vector-d%E1%BB%AF-li%E1%BB%87u-nam-d%E1%BB%8Bch-v%E1%BB%A5-h%E1%BB%97-tr%E1%BB%A3-kh%C3%A1ch-h%C3%A0ng-h%E1%BB%93-s%C6%A1-avatar-v%E1%BB%9Bi-tai-nghe-v%C3%A0-%C4%91%E1%BB%93.jpg?s=1024x1024&w=is&k=20&c=DS-aaXhPY9osRxEOLw6IBTmvghkZGgTlfvdLeMTtEnU=")
+        loai5 = LoaiChiTieu(name="Vui - chơi", idnhomchitieu=nhom3.id, image="https://banner2.cleanpng.com/20180421/req/kisspng-leisure-travel-computer-icons-hospitality-industry-leisure-and-entertainment-5adabec8272b98.6110896915242851281605.jpg")
 
         db.session.add_all([loai1, loai2, loai3, loai4, loai5])
         db.session.commit()
 
         # Loai chi tieu
         # nhom5 Nợ
-        loai1 = LoaiChiTieu(name="Trả nợ", idnhomchitieu=nhom5.id)
-        loai2 = LoaiChiTieu(name="Trả lãi", idnhomchitieu=nhom5.id)
+        loai1 = LoaiChiTieu(name="Trả nợ", idnhomchitieu=nhom5.id, image="https://banner2.cleanpng.com/20180806/zjc/kisspng-debt-clip-art-money-computer-icons-investment-5b6918af1ae205.0498421215336142551101.jpg")
+        loai2 = LoaiChiTieu(name="Trả lãi", idnhomchitieu=nhom5.id, image="https://timo.vn/wp-content/uploads/lai-suat-ngan-hang.png")
 
         db.session.add_all([loai1, loai2])
         db.session.commit()
 
         # Loai chi tieu
         # nhom6 Nợ
-        loai1 = LoaiChiTieu(name="Lương", idnhomchitieu=nhom6.id)
-        loai2 = LoaiChiTieu(name="Thu nhập khác", idnhomchitieu=nhom6.id)
+        loai1 = LoaiChiTieu(name="Lương", idnhomchitieu=nhom6.id, image="https://gp1.wac.edgecastcdn.net/802892/http_public_production/artists/images/6781721/original/resize:248x186/crop:x0y80w640h480/hash:1578983472/loan-icon-png_239807.jpg?1578983472")
+        loai2 = LoaiChiTieu(name="Thu nhập khác", idnhomchitieu=nhom6.id, image="https://cdn.scb.com.vn/picture/icon_tien_gui_tiet_kiem_phat_loc_tai_1_.jpg")
 
         db.session.add_all([loai1, loai2])
         db.session.commit()

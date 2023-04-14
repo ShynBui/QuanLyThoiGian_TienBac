@@ -25,7 +25,7 @@ def chat_room():
     room = untils.get_chatroom_by_user_id(id=current_user.id)
     list_user = untils.load_message(room.room_id)
 
-    print(room.room_id)
+    # print(room.room_id)
 
     user_send = [(untils.get_user_by_id(x.user_id).name) for x in list_user]
 
@@ -39,7 +39,7 @@ def chat_room():
     user_image.pop(0)
     user_id.pop(0)
 
-    print(user_send)
+    # print(user_send)
 
     if user_name and room:
 
@@ -57,7 +57,7 @@ def chat_room():
 @app.route("/admin/chatadmin/<int:room_id>")
 def chat_room_admin(room_id):
     if current_user.userRole == UserRole.SYSADMIN or current_user.userRole == UserRole.ADMIN:
-        print(room_id)
+        # print(room_id)
         user_name = current_user.name
         room = untils.get_chatroom_by_room_id(id=room_id)
         list_user = untils.load_message(room.room_id)
@@ -236,10 +236,17 @@ def taichinh():
     time2 = chitieuganday[1]
     tien2 = chitieuganday[2]
 
+    #Chi tieu hom nay
+
+    datahomnay = untils.get_ten_chi_tieu_va_tien(current_user.idtaikhoan)
+    tien3 = datahomnay[1]
+    ten3 = datahomnay[0]
+
     sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
     return render_template('taichinh.html', sotien=str(sotien), topchitieu=topchitieu, tenloai=ten,
                            n=len(tenloai), tongtien=tien, chitieuganday=chitieuganday,
-                           ten2=ten2, time2=time2, tien2=tien2, n2=len(ten2))
+                           ten2=ten2, time2=time2, tien2=tien2, n2=len(ten2), ten3=ten3, tien3=tien3,
+                           n3=len(ten3))
 
 @app.route('/taichinhtuan', methods=['get', 'post'])
 def taichinh_tuan():
@@ -270,10 +277,17 @@ def taichinh_tuan():
     time2 = chitieuganday[1]
     tien2 = chitieuganday[2]
 
+    # Chi tieu hom nay
+
+    datahomnay = untils.get_ten_chi_tieu_va_tien(current_user.idtaikhoan)
+    tien3 = datahomnay[1]
+    ten3 = datahomnay[0]
+
     return render_template('taichinh.html', sotien=str(sotien), tien= tientuannay,
                            ten=['Tuần trước', 'Tuần này'], topchitieu=topchitieu, tenloai=ten,
                            n=len(tenloai), tongtien=tien, chitieuganday=chitieuganday,
-                           ten2=ten2, time2=time2, tien2=tien2, n2=len(ten2))
+                           ten2=ten2, time2=time2, tien2=tien2, n2=len(ten2), ten3=ten3, tien3=tien3,
+                           n3=len(ten3))
 
 @app.route('/taichinhthang', methods=['get', 'post'])
 def taichinh_thang():
@@ -304,11 +318,28 @@ def taichinh_thang():
     time2 = chitieuganday[1]
     tien2 = chitieuganday[2]
 
+    # Chi tieu hom nay
+
+    datahomnay = untils.get_ten_chi_tieu_va_tien(current_user.idtaikhoan)
+    tien3 = datahomnay[1]
+    ten3 = datahomnay[0]
 
     return render_template('taichinh.html', sotien=str(sotien), tien= tientuannay,
                            ten=['Tháng trước', 'Tháng này'], topchitieu=topchitieu, tenloai=ten,
                            n=len(tenloai), tongtien=tien, chitieuganday=chitieuganday,
-                           ten2=ten2, time2=time2, tien2=tien2, n2=len(ten2))
+                           ten2=ten2, time2=time2, tien2=tien2, n2=len(ten2), ten3=ten3, tien3=tien3,
+                           n3=len(ten3))
+
+@app.route('/process_addtien', methods=['post', 'get'])
+def procees_addtien():
+
+    tien = request.form.get('themtien')
+
+    print(tien)
+    untils.add_tien(current_user.idtaikhoan, int(tien))
+
+    print("a")
+    return redirect(url_for('taichinh'))
 
 @app.route('/giaodich', methods=['post', 'get'])
 def giaodich():
@@ -327,7 +358,7 @@ def giaodich():
         note = request.form.get('note')
         name = request.form.get('name')
 
-        print(sotien, nhom, loai, ngay)
+        # print(sotien, nhom, loai, ngay)
 
         if float(sotien) > 0 and ngay:
             untils.add_giao_dich(current_user.idtaikhoan, int(loai), float(sotien),
