@@ -1,0 +1,161 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Chat room {% endblock %}
+{% block css %}
+<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/taiChinh.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chitieuhangthang.css') }}">
+{%endblock%}
+
+
+{% block content %}
+
+<!-- CONTENT -->
+<section id="content">
+    <!-- NAVBAR -->
+
+    <!-- NAVBAR -->
+
+    <!-- MAIN -->
+    <main>
+
+
+        <div class="table-data">
+            <div class="order" style="position: relative">
+                <div class="head">
+                    <h3>Chi tiêu hàng tháng</h3>
+                    <i class='bx bx-search'></i>
+                    <i class='bx bx-filter'></i>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Loại chi tiêu</th>
+
+                        <th>Số tiền</th>
+                    </tr>
+                    </thead>
+                    <form method="post" action="" style="width:30%" class="">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <img src="img/people.png">
+                                <p>Ăn uống</p>
+                            </td>
+
+                            <td>
+                                <input min="0" value="500.000" name="sotien" type="number"
+                                       class="form-control status completed">
+                                <!--                                     <span class="">500.000</span>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="img/people.png">
+                                <p>John Doe</p>
+                            </td>
+
+                            <td>
+                                <input min="0" value="500.000" name="sotien" type="number"
+                                       class="form-control status pending">
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="img/people.png">
+                                <p>John Doe</p>
+                            </td>
+
+                            <td>
+                                <input min="0" value="500.000" name="sotien" type="number"
+                                       class="form-control status process">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="img/people.png">
+                                <p>John Doe</p>
+                            </td>
+
+                            <td>
+                                <input min="0" value="500.000" name="sotien" type="number"
+                                       class="form-control status pending">
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="img/people.png">
+                                <p>John Doe</p>
+                            </td>
+
+                            <td>
+                                <input min="0" value="500.000" name="sotien" type="number"
+                                       class="form-control status completed">
+                                <!--                            <span class="status completed">Completed</span>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <br>
+                        <div class="control">
+                            <div class="edit_control">
+                                <button class="btn btn-warning" type="">
+                                    Edit
+                                    <i class='bx bxs-save'></i>
+                                </button>
+
+
+                            </div>
+                            <div class="submit_control">
+                                 <button class="btn btn-success" type="submit">
+                                    Save
+                                    <i class='bx bxs-save'></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        </tbody>
+                    </form>
+                </table>
+            </div>
+            <div class="todo">
+                <div class="head">
+                    <h3>Kế hoạch cắt giảm chi tiêu</h3>
+                    <i class='bx bx-plus'></i>
+                    <i class='bx bx-filter'></i>
+                </div>
+                <ul class="todo-list">
+                    <li class="completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="not-completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="not-completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <!-- MAIN -->
+</section>
+<!-- CONTENT -->
+
+<script src="{{ url_for('static', filename='js/taiChinh.js') }}"></script>
+
+{%endblock%}

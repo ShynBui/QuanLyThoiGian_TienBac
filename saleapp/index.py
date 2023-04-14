@@ -273,5 +273,11 @@ def giaodich():
                            date=datetime.strptime('2023-04-14', '%Y-%m-%d').date(), name=name)
 
 
+
+@app.route('/chitieuhangthang', methods=['post', 'get'])
+def chitieuhangthang():
+    return render_template('chitieuhangthang.html')
+
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
