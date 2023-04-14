@@ -197,6 +197,9 @@ if __name__ == '__main__':
         db.session.commit()
         password = str(hashlib.md5('1'.encode('utf-8')).hexdigest())
 
+        #admin
+        #tk: u1
+        #mk: 1
         room = Room(name='ccv', is_reply=False, date=datetime.now())
         db.session.add_all([room])
         db.session.commit()
@@ -212,5 +215,27 @@ if __name__ == '__main__':
         db.session.commit()
         message = Message(room_id=room.id, user_id=user.id, content='', date=datetime.now())
         db.session.add_all([message])
+        db.session.commit()
+
+        # user
+        # tk: u2
+        # mk: 1
+        room2 = Room(name='ccv', is_reply=False, date=datetime.now())
+        db.session.add_all([room2])
+        db.session.commit()
+        taiKhoan2 = TaiKhoan()
+        db.session.add_all([taiKhoan2])
+        db.session.commit()
+        user2 = User(name="Bui Tien Thanh", username="u2",
+                    password=password,
+                    avatar='https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/275665854_949509355934005_7586877570851118227_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=o_zqYzGKu58AX-dndCH&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfCpQf0QSxLtDvv6zCRY63_QLvXyVAmMx15h56a-fFGT9w&oe=643DD79A',
+                    email="20512052047hoang@ou.edu.vn", joined_date=datetime.now(),
+                    diachi="Gò Vấp", queQuan='Dong Lak', facebook='https://www.facebook.com/d8.ndh',
+                    dob=datetime.strptime("22-06-1990", '%d-%m-%Y').date(), sex=0, userRole=UserRole.USER,
+                    idtaikhoan=taiKhoan2.id)
+        db.session.add_all([user2])
+        db.session.commit()
+        message2 = Message(room_id=room.id, user_id=user.id, content='', date=datetime.now())
+        db.session.add_all([message2])
         db.session.commit()
         db.session.commit()
