@@ -19,14 +19,14 @@
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Dashboard</h1>
+                <h1>Tài chính cá nhân</h1>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="#">Dashboard</a>
+                        <a href="#">Tài chính cá nhân</a>
                     </li>
                     <li><i class='bx bx-chevron-right'></i></li>
                     <li>
-                        <a class="active" href="#">Home</a>
+                        <a class="active" href="#">Tài chính</a>
                     </li>
                 </ul>
             </div>
@@ -176,60 +176,7 @@
 <!-- CONTENT -->
 
 <script src="{{ url_for('static', filename='js/taiChinh.js') }}"></script>
-<h1>{{sotien}} đ </h1>
-<h5>Tổng số dư</h5>
 
-<div>
-    <span>Ví của tôi</span>
-    <a href="#">Xem tất cả</a>
-
-    <div>
-        <img src="https://png.pngtree.com/element_our/20190528/ourmid/pngtree-orange-wallet-icon-image_1168655.jpg"
-             style="border-radius: 50%; width: 50px">
-        <span>Tiền mặt</span>
-        <span>{{sotien}} đ</span>
-    </div>
-
-    <div>
-        <div>
-            <span> Báo cáo chi tiêu </span>
-            <a href="#">Xem báo cáo</a>
-        </div>
-
-        <div>
-            <form>
-                <div class="row justify-content-between">
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-primary">Tuần</button>
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-secondary">Tháng</button>
-                    </div>
-                </div>
-            </form>
-
-            <div>
-                Số tiền đã chi - dòng này để tiền vào
-                <div>Tổng chi tuần/tháng này</div>
-            </div>
-
-            <!--            <div id="Mychart">Để biểu đồ vô đây</div>-->
-
-            <div>Chi tiêu nhiều nhất (List các loại chi tiêu)</div>
-
-            <div>
-                <img src="/static/image/codeheroes.png" style="height: 300px">
-            </div>
-
-            <div>
-                Giao dịch gần đây - top 3 giao dịch
-            </div>
-        </div>
-
-    </div>
-
-    <a href="{{url_for('giaodich')}}">Thêm giao dịch</a>
-</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

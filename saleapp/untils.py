@@ -34,15 +34,8 @@ def add_user(name, username, password, diachi, queQuan, **kwargs):
     # print(diachi)
     # print(queQuan)
     user = User(name=name.strip(), username=username, password=password, email=kwargs.get('email'),diachi=diachi, queQuan=queQuan,
-                 dob=kwargs.get('dob'))
-    # user2 = User(name="Bui Tien Hoang", username="u1",
-    #             password=password,
-    #             avatar='https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/191455455_1236939360069997_5418463114445577817_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=rcajabo0f74AX9qvH8y&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfBoXfETYQ2MJIS8cYaTUQDAix3LXAwX2UK0Vz-P8P1M1w&oe=645FD60B',
-    #             email="20512052047hoang@ou.edu.vn", joined_date=datetime.now(),
-    #             diachi="Gò Vấp", queQuan='Dong Lak', facebook='https://www.facebook.com/d8.ndh',
-    #             dob=datetime.strptime("22-06-1990", '%d-%m-%Y').date(), sex=0, userRole=UserRole.SYSADMIN,
-    #             idtaikhoan=taiKhoan3.id)
-    # print(user2)
+                 dob=kwargs.get('dob'), sdt=kwargs.get('phone'), idtaikhoan = taiKhoan.id)
+
     db.session.add_all([user])
 
     db.session.commit()
@@ -159,6 +152,7 @@ def get_tai_khoan_tai_chinh(id_taikhoan):
     taichinh = TaiKhoan.query.filter(TaiKhoan.id.__eq__(id_taikhoan))
 
     return taichinh.first()
+
 
 def get_all_nhom():
     loai = NhomChiTieu.query.all()

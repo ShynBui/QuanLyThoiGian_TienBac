@@ -5,10 +5,14 @@
 {% block css %}
 <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/giaodich.css') }}">
+
+
 {%endblock%}
 {% block content %}
 
+
 <div class="container">
+
     <h1>Thêm giao dịch</h1>
     <div>
     <form id="myForm" method="post" action="/giaodich">

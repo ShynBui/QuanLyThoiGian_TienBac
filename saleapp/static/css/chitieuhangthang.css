@@ -40,3 +40,8 @@ transition: 0.5s;
     background:#a9891b;
 
 }
+.money_hint{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
