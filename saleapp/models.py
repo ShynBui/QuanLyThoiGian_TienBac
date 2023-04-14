@@ -183,6 +183,7 @@ class TaiKhoanChiTieu(db.Model):
     idkhoanchitieu = Column(Integer, ForeignKey(KhoanChiTieu.id), nullable=False, primary_key=True)
     idtaikhoan = Column(Integer, ForeignKey(TaiKhoan.id), nullable=False, primary_key=True)
     tienChi = Column(Float)
+    note = Column(Text)
 
     def __str__(self):
         return self.idkhoanchitieu
@@ -203,7 +204,7 @@ if __name__ == '__main__':
         nhom2 = NhomChiTieu(name="Chi tiêu cần thiết", isGain=False)
         nhom3 = NhomChiTieu(name="Vui chơi giải trí", isGain=False)
         nhom5 = NhomChiTieu(name="Nợ", isGain=False)
-        nhom6 = NhomChiTieu(name="Khoản thu", isGain=False)
+        nhom6 = NhomChiTieu(name="Khoản thu", isGain=True)
 
         db.session.add_all([nhom1,nhom2,nhom3,nhom5, nhom6])
         db.session.commit()

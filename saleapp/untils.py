@@ -161,3 +161,39 @@ def get_tai_khoan_tai_chinh(id_taikhoan):
     taichinh = TaiKhoan.query.filter(TaiKhoan.id.__eq__(id_taikhoan))
 
     return taichinh.first()
+
+def get_all_nhom():
+    loai = NhomChiTieu.query.all()
+
+    return loai
+
+def get_all_loai_theo_nhom(id_nhom):
+    loai = LoaiChiTieu.query.filter(LoaiChiTieu.idnhomchitieu == id_nhom)
+
+    return loai.all()
+
+def add_giao_dich(idtaikhoan, idloaichitieu, sotien, idnhomchitieu, note, ngay, name):
+
+    khoanchitieu = KhoanChiTieu(name=name, ngayChiTieu=ngay, idLoaiChiTieu=idloaichitieu)
+    db.session.add(khoanchitieu)
+    db.session.commit()
+
+    taikhoanchitieu = TaiKhoanChiTieu(idkhoanchitieu=khoanchitieu.id, idtaikhoan=idtaikhoan, tienChi=sotien,
+                                      note=note)
+
+    db.session.add(taikhoanchitieu)
+    db.session.commit()
+
+    #trừ tiền
+    nhomchitieu = NhomChiTieu.query.filter(NhomChiTieu.id == idnhomchitieu).first()
+    taikhoan = TaiKhoan.query.filter(TaiKhoan.id == idtaikhoan).first()
+
+    if(nhomchitieu.isGain == True):
+        taikhoan.soTien = taikhoan.soTien + sotien
+        db.session.commit()
+    else:
+        taikhoan.soTien = taikhoan.soTien - sotien
+        db.session.commit()
+
+    db.session.commit()
+

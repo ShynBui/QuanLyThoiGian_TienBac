@@ -1,5 +1,4 @@
 import math
-import datetime
 from flask import render_template, request, redirect, session, jsonify, url_for
 from saleapp import app, admin, login, untils, socketio
 from saleapp.models import UserRole
@@ -8,7 +7,17 @@ import cloudinary.uploader
 from flask_socketio import SocketIO, emit, join_room
 import requests
 import openpyxl
+from datetime import datetime, date
 
+giaodich_data = {
+    "idTaiKhoan": 1,
+    "idnhomchitieu": 1,
+    "idloaichitieu": 1,
+    "ngay": '2023-04-14',
+    "note": '',
+    "sotien": 0,
+    "name":""
+}
 
 @app.route("/")
 def home():
@@ -211,12 +220,50 @@ def user_signout():
 def user_load(user_id):
     return untils.get_user_by_id(user_id=user_id)
 
+#Tài chính
 @app.route('/taichinh')
 def taichinh():
 
     sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
     return render_template('taichinh.html', sotien=str(sotien))
-#Tài khoản
+
+@app.route('/giaodich', methods=['post', 'get'])
+def giaodich():
+
+    sotien = 0
+    name = ''
+    nhom = 1
+    loai = 1
+    all_nhom = untils.get_all_nhom()
+    all_loai = untils.get_all_loai_theo_nhom(1)
+    if request.method == 'POST':
+        sotien = request.form.get('sotien')
+        nhom = request.form.get('nhom')
+        loai = request.form.get('loai')
+        ngay = request.form.get('ngay')
+        note = request.form.get('note')
+        name = request.form.get('name')
+
+        print(sotien, nhom, loai, ngay)
+
+        if float(sotien) > 0 and ngay:
+            untils.add_giao_dich(current_user.idtaikhoan, int(loai), float(sotien),
+                                 int(nhom), note, datetime.strptime(ngay, '%Y-%m-%d').date(), name)
+
+            sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
+            return render_template('taichinh.html', sotien=str(sotien))
+
+        all_loai = untils.get_all_loai_theo_nhom(nhom)
+
+        return render_template('giaodich.html', all_nhom=all_nhom, all_loai=all_loai, nhomselect=int(nhom),
+                           sotien=sotien, ngay=ngay, loai=int(loai), note=note.strip(),
+                               date=datetime.strptime(ngay, '%Y-%m-%d').date(), name=name)
+
+
+    return render_template('giaodich.html', all_nhom=all_nhom, all_loai=all_loai, nhomselect=int(nhom),
+                           sotien=sotien, ngay=datetime.now(), loai=int(0), note='',
+                           date=datetime.strptime('2023-04-14', '%Y-%m-%d').date(), name=name)
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
