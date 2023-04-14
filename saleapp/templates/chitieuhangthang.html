@@ -30,8 +30,10 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Loại chi tiêu</th>
-
+                        <th>Chi tiêu hàng tháng</th>
+                        <th>
+                            Tiến độ
+                        </th>
                         <th>Số tiền</th>
                     </tr>
                     </thead>
@@ -42,7 +44,10 @@
                                 <img src="img/people.png">
                                 <p>Ăn uống</p>
                             </td>
+                            <td>
 
+                                <progress value="32" max="100"> 32%</progress>
+                            </td>
                             <td>
                                 <input min="0" value="500.000" name="sotien" type="number"
                                        class="form-control status completed">
@@ -52,47 +57,46 @@
                         <tr>
                             <td>
                                 <img src="img/people.png">
-                                <p>John Doe</p>
+                                <p>Ăn uống</p>
                             </td>
-
                             <td>
-                                <input min="0" value="500.000" name="sotien" type="number"
-                                       class="form-control status pending">
 
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
+                                <progress value="32" max="100"> 32%</progress>
                             </td>
-
-                            <td>
-                                <input min="0" value="500.000" name="sotien" type="number"
-                                       class="form-control status process">
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
-                            </td>
-
-                            <td>
-                                <input min="0" value="500.000" name="sotien" type="number"
-                                       class="form-control status pending">
-
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
-                            </td>
-
                             <td>
                                 <input min="0" value="500.000" name="sotien" type="number"
                                        class="form-control status completed">
-                                <!--                            <span class="status completed">Completed</span>-->
+                                <!--                                     <span class="">500.000</span>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="img/people.png">
+                                <p>Ăn uống</p>
+                            </td>
+                            <td>
+
+                                <progress value="32" max="100"> 32%</progress>
+                            </td>
+                            <td>
+                                <input min="0" value="500.000" name="sotien" type="number"
+                                       class="form-control status completed">
+                                <!--                                     <span class="">500.000</span>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="img/people.png">
+                                <p>Ăn uống</p>
+                            </td>
+                            <td>
+
+                                <progress value="32" max="100"> 32%</progress>
+                            </td>
+                            <td>
+                                <input min="0" value="500.000" name="sotien" type="number"
+                                       class="form-control status completed">
+                                <!--                                     <span class="">500.000</span>-->
                             </td>
                         </tr>
                         <tr>
@@ -103,14 +107,12 @@
                         <div class="control">
                             <div class="edit_control">
 
-                                    Edit
-                                    <i class='bx bxs-save'></i>
-
-
+                                Edit
+                                <i class='bx bxs-save'></i>
 
                             </div>
                             <div class="submit_control">
-                                 <button class="btn btn-success" type="submit">
+                                <button class="btn btn-success" type="submit">
                                     Save
                                     <i class='bx bxs-save'></i>
                                 </button>
@@ -163,6 +165,7 @@ const submitControl = document.querySelector(".submit_control");
 control.addEventListener("click", function() {
   submitControl.style.display = "inline-block";
 });
+
 </script>
 <script src="{{ url_for('static', filename='js/taiChinh.js') }}"></script>
 
