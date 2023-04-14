@@ -9,13 +9,14 @@ import requests
 import openpyxl
 from datetime import datetime, date
 
-giaodich = {
-    "idtaikhoan": 0,
-    "idnhomchitieu": 0,
-    "idloaichitieu": 0,
-    "ngay": 0,
+giaodich_data = {
+    "idTaiKhoan": 1,
+    "idnhomchitieu": 1,
+    "idloaichitieu": 1,
+    "ngay": '2023-04-14',
     "note": '',
-    "sotien": 0
+    "sotien": 0,
+    "name":""
 }
 
 @app.route("/")
@@ -221,47 +222,39 @@ def taichinh():
 def giaodich():
 
     sotien = 0
-    nhom = 0
+    name = ''
+    nhom = 1
+    loai = 1
     all_nhom = untils.get_all_nhom()
+    all_loai = untils.get_all_loai_theo_nhom(1)
     if request.method == 'POST':
         sotien = request.form.get('sotien')
         nhom = request.form.get('nhom')
         loai = request.form.get('loai')
         ngay = request.form.get('ngay')
         note = request.form.get('note')
+        name = request.form.get('name')
 
-        if sotien == '':
-            sotien = 0
-        if ngay == '':
-            ngay = '2023-04-15'
-        if not loai:
-            loai = 0
-        if nhom == '':
-            nhom = 0
+        print(sotien, nhom, loai, ngay)
 
-        print(loai, ngay, nhom, sotien)
+        if float(sotien) > 0 and ngay:
+            untils.add_giao_dich(current_user.idtaikhoan, int(loai), float(sotien),
+                                 int(nhom), note, datetime.strptime(ngay, '%Y-%m-%d').date(), name)
 
-        giaodich["idtaikhoan"] = current_user.idtoaikhoan
-        giaodich["idloaichitieu"] = loai
-        giaodich["idnhomchitieu"] = nhom
-        giaodich["sotien"] = sotien
-        giaodich["note"] = note
-        giaodich["ngay"] = ngay
+            sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
+            return render_template('taichinh.html', sotien=str(sotien))
 
-        all_loai =untils.get_all_loai_theo_nhom(nhom)
+        all_loai = untils.get_all_loai_theo_nhom(nhom)
 
         return render_template('giaodich.html', all_nhom=all_nhom, all_loai=all_loai, nhomselect=int(nhom),
-                           sotien=sotien, ngay=ngay, loai=int(loai), note=note.strip(), date=datetime.strptime(ngay, '%Y-%m-%d').date())
+                           sotien=sotien, ngay=ngay, loai=int(loai), note=note.strip(),
+                               date=datetime.strptime(ngay, '%Y-%m-%d').date(), name=name)
 
-    return render_template('giaodich.html', all_nhom=all_nhom, all_loai=untils.get_all_loai_theo_nhom(nhom), nhomselect=int(nhom),
+
+    return render_template('giaodich.html', all_nhom=all_nhom, all_loai=all_loai, nhomselect=int(nhom),
                            sotien=sotien, ngay=datetime.now(), loai=int(0), note='',
-                           date=datetime.now())
+                           date=datetime.strptime('2023-04-14', '%Y-%m-%d').date(), name=name)
 
-@app.route('/process_giaodich')
-def process_giaodich():
-
-    print('ss')
-    return redirect(url_for('taichinh'))
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
