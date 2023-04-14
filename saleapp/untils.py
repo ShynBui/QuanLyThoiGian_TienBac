@@ -253,3 +253,58 @@ def get_all_tien_thang_truoc_va_thang_nay(idtaikhoan):
 
     return [tongtienchituantruoc, tongtienchituannay]
 
+def get_top_loai_chi_tieu(idUser):
+    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == idUser).all()
+
+    my_list = [x.idkhoanchitieu for x in taikhoanchitieu]
+
+    # khoanchiteu = KhoanChiTieu.query.filter(KhoanChiTieu.id.in_(my_list)).all()
+
+    loaichitieu = db.session.query(KhoanChiTieu.idLoaiChiTieu, db.func.count(KhoanChiTieu.id).label('soluong'))\
+                    .filter(KhoanChiTieu.id.in_(my_list))\
+                    .group_by(KhoanChiTieu.idLoaiChiTieu)\
+                    .limit(5)
+
+    print(loaichitieu.all())
+
+    return loaichitieu.all()
+
+
+def get_ten_loai_theo_id_loai(idLoai):
+
+    loai = LoaiChiTieu.query.filter(LoaiChiTieu.id == idLoai)
+
+    return loai.first()
+
+
+def get_tong_tien_theo_id_loai(idLoai):
+
+    id = KhoanChiTieu.query.filter(KhoanChiTieu.idLoaiChiTieu == idLoai).all()
+
+    list_id = []
+
+    for i in id:
+        list_id.append(i.id)
+
+    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idkhoanchitieu.in_(list_id)).all()
+
+    sotien = 0
+
+    for i in taikhoanchitieu:
+        sotien = sotien + i.tienChi
+
+    return sotien
+
+def sort_ten_tongtien(ten, tongtien):
+
+    for i in range(len(tongtien)):
+        for j in range(i + 1, len(tongtien)):
+            if tongtien[j] > tongtien[i]:
+                temp = tongtien[i]
+                tongtien[i] = tongtien[j]
+                tongtien[j] = temp
+                temp = ten[i]
+                ten[i] = ten[j]
+                ten[j] = temp
+
+    return [ten, tongtien]
