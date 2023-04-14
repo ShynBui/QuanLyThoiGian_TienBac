@@ -303,13 +303,19 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
 <script>
      const getChart = document.getElementById('myChart');
-     let data_ten = ["Tuần trước", "Tuần này"], data_tien = []
+     let data_ten = [], data_tien = []
 
 
     {% for i in tien %}
         data_tien.push('{{i}}')
     {%endfor%}
 
+    {% for i in ten %}
+        data_ten.push('{{i}}')
+    {%endfor%}
+
+    const ans = data_ten[0].split(" ");
+    let word = 'Số tiền đã dùng trong ' + ans[0].toLowerCase() + ' này';
 
 
      new Chart(getChart, {
@@ -317,8 +323,16 @@
     data: {
       labels: data_ten,
       datasets: [{
-        label: 'Số tiền đã dùng trong tháng này',
+        label: word,
         data: data_tien,
+        backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+    ],
         borderWidth: 1
       }]
     },

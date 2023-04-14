@@ -224,7 +224,7 @@ def taichinh_tuan():
 
     tientuannay = untils.get_all_tien_tuan_truoc_va_tuan_nay(current_user.idtaikhoan)
 
-    return render_template('taichinh.html', sotien=str(sotien), tien= tientuannay)
+    return render_template('taichinh.html', sotien=str(sotien), tien= tientuannay, ten=['Tuần trước', 'Tuần này'])
 
 @app.route('/taichinhthang', methods=['get', 'post'])
 def taichinh_thang():
@@ -233,7 +233,7 @@ def taichinh_thang():
 
     tientuannay = untils.get_all_tien_thang_truoc_va_thang_nay(current_user.idtaikhoan)
 
-    return render_template('taichinh.html', sotien=str(sotien), tien= tientuannay)
+    return render_template('taichinh.html', sotien=str(sotien), tien= tientuannay, ten=['Tháng trước', 'Tháng này'])
 
 @app.route('/giaodich', methods=['post', 'get'])
 def giaodich():
