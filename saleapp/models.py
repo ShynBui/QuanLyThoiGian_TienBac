@@ -5,7 +5,8 @@ from datetime import datetime
 from enum import Enum as UserEnum
 from flask_login import UserMixin
 import hashlib
-
+from saleapp.encoding import  encoding_no1
+from saleapp.decoding import decoding_no1
 class BaseModel(db.Model):
     __abstract__ = True
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -295,6 +296,7 @@ if __name__ == '__main__':
         db.session.add_all([room2])
         db.session.commit()
         taiKhoan2 = TaiKhoan()
+
         db.session.add_all([taiKhoan2])
         db.session.commit()
         user2 = User(name="Bui Tien Thanh", username="u2",
@@ -304,6 +306,7 @@ if __name__ == '__main__':
                     diachi="Gò Vấp", queQuan='Dong Lak', facebook='https://www.facebook.com/d8.ndh',
                     dob=datetime.strptime("22-06-1990", '%d-%m-%Y').date(), sex=0, userRole=UserRole.USER,
                     idtaikhoan=taiKhoan2.id)
+        print(user2)
         db.session.add_all([user2])
         db.session.commit()
         message2 = Message(room_id=room2.id, user_id=user2.id, content='', date=datetime.now())

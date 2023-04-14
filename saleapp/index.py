@@ -128,9 +128,17 @@ def user_register():
         dob = request.form.get('dob')
         phone = request.form.get('phone')
         diachi = request.form.get('diachi')
+        queQuan = request.form.get('hometown')
+
         confirm = request.form.get('confirm')
         avatar_path = None
-
+        # user = User(name="Bui Tien Hoang", username="u1",
+        #             password=password,
+        #             avatar='https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/191455455_1236939360069997_5418463114445577817_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=rcajabo0f74AX9qvH8y&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfBoXfETYQ2MJIS8cYaTUQDAix3LXAwX2UK0Vz-P8P1M1w&oe=645FD60B',
+        #             email="20512052047hoang@ou.edu.vn", joined_date=datetime.now(),
+        #             diachi="Gò Vấp", queQuan='Dong Lak', facebook='https://www.facebook.com/d8.ndh',
+        #             dob=datetime.strptime("22-06-1990", '%d-%m-%Y').date(), sex=0, userRole=UserRole.SYSADMIN,
+        #             idtaikhoan=taiKhoan.id)
     try:
         if str(password) == str(confirm):
             avatar = request.files.get('avatar')
@@ -142,6 +150,7 @@ def user_register():
                             username=username,
                             password=password,
                             diachi=diachi,
+                            queQuan=queQuan,
                             email=email,
                             avatar=avatar_path,
                             sex=sex,
