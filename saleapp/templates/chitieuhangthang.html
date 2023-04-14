@@ -27,101 +27,58 @@
                     <i class='bx bx-search'></i>
                     <i class='bx bx-filter'></i>
                 </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Chi tiêu hàng tháng</th>
-                        <th>
-                            Tiến độ
-                        </th>
-                        <th>Số tiền</th>
-                    </tr>
-                    </thead>
-                    <form method="post" action="" style="width:30%" class="">
+                <form method="post" action="" style="width:100%" class="">
+                    {%for i in range(n)%}
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>{{tennhom[i]}}</th>
+                            <th>
+                                Tiến độ
+                            </th>
+                            <th>
+                                Đã dùng
+                            </th>
+                            <th>Số tiền</th>
+                        </tr>
+                        </thead>
                         <tbody>
+                        {%for j in chitieu[i]%}
                         <tr>
                             <td>
-                                <img src="img/people.png">
-                                <p>Ăn uống</p>
+                                <img src="{{j.image}}">
+                                <p>{{j.name}}</p>
                             </td>
                             <td>
-
                                 <progress value="32" max="100"> 32%</progress>
                             </td>
                             <td>
-                                <input min="0" value="500.000" name="sotien" type="number"
+                                <input style="margin-left:40px" min="0" value="500.000" name="" type="number"
                                        class="form-control status completed">
-                                <!--                                     <span class="">500.000</span>-->
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>Ăn uống</p>
                             </td>
                             <td>
-
-                                <progress value="32" max="100"> 32%</progress>
-                            </td>
-                            <td>
-                                <input min="0" value="500.000" name="sotien" type="number"
+                                <input style="margin-left:40px" min="0" value="500.000" name="sotien" type="number"
                                        class="form-control status completed">
-                                <!--                                     <span class="">500.000</span>-->
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>Ăn uống</p>
-                            </td>
-                            <td>
-
-                                <progress value="32" max="100"> 32%</progress>
-                            </td>
-                            <td>
-                                <input min="0" value="500.000" name="sotien" type="number"
-                                       class="form-control status completed">
-                                <!--                                     <span class="">500.000</span>-->
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p>Ăn uống</p>
-                            </td>
-                            <td>
-
-                                <progress value="32" max="100"> 32%</progress>
-                            </td>
-                            <td>
-                                <input min="0" value="500.000" name="sotien" type="number"
-                                       class="form-control status completed">
-                                <!--                                     <span class="">500.000</span>-->
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        {%endfor%}
                         <br>
-                        <div class="control">
-                            <div class="edit_control">
-
-                                Edit
-                                <i class='bx bxs-save'></i>
-
-                            </div>
-                            <div class="submit_control">
-                                <button class="btn btn-success" type="submit">
-                                    Save
-                                    <i class='bx bxs-save'></i>
-                                </button>
-                            </div>
-                        </div>
-
                         </tbody>
-                    </form>
-                </table>
+                    </table>
+                    {%endfor%}
+                    <div class="control">
+                        <div class="edit_control">
+                            Edit
+                            <i class='bx bxs-save'></i>
+                        </div>
+                        <div class="submit_control">
+                            <button class="btn btn-success" type="submit">
+                                Save
+                                <i class='bx bxs-save'></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="todo">
                 <div class="head">
@@ -165,6 +122,8 @@ const submitControl = document.querySelector(".submit_control");
 control.addEventListener("click", function() {
   submitControl.style.display = "inline-block";
 });
+
+
 
 </script>
 <script src="{{ url_for('static', filename='js/taiChinh.js') }}"></script>
