@@ -9,16 +9,6 @@ import requests
 import openpyxl
 from datetime import datetime, date
 
-giaodich_data = {
-    "idTaiKhoan": 1,
-    "idnhomchitieu": 1,
-    "idloaichitieu": 1,
-    "ngay": '2023-04-14',
-    "note": '',
-    "sotien": 0,
-    "name":""
-}
-
 @app.route("/")
 def home():
     return render_template('index.html')
