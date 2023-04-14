@@ -1,0 +1,60 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Chat room {% endblock %}
+
+
+{% block content %}
+
+<div>
+    <form id="myForm" method="post" action="/giaodich">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Số tiền</label>
+            <input value="{{sotien}}" name="sotien" type="number" class="form-control"> đ
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Chọn nhóm</label>
+            <select name="nhom" id="myDropdown" class="form-select" aria-label="Default select example">
+                {%for i in all_nhom%}
+                {%if nhomselect == i.id%}
+                <option value="{{i.id}}" selected>{{i.name}}</option>
+                {%else%}
+                <option value="{{i.id}}">{{i.name}}</option>
+                {%endif%}
+                {%endfor%}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Chọn Loại</label>
+            <select name="loai" class="form-select" aria-label="Default select example">
+                {%for i in all_loai%}
+                {%if loai == i.id%}
+                <option value="{{i.id}}" selected>{{i.name}}</option>
+                {%else%}
+                <option value="{{i.id}}">{{i.name}}</option>
+                {%endif%}
+                {%endfor%}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Ghi chú</label>
+            <textarea name="note" class="form-control" id="exampleFormControlTextarea1" rows="3">{{note}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Hôm nay</label>
+            <input value="{{date}}" id="myDate" name="ngay" type="date" class="form-control" id="exampleFormControlInput1">
+        </div>
+        <a class="btn btn-primary" href="{{url_for('process_giaodich')}}">
+            Save
+        </a>
+
+    </form>
+</div>
+
+<script>
+    document.getElementById("myDropdown").addEventListener("change", function() {
+  document.getElementById("myForm").submit();
+});
+
+
+</script>
+{%endblock%}
