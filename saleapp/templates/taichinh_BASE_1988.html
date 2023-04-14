@@ -31,10 +31,6 @@
                 </ul>
             </div>
              <div class="sub_head">
-                 <a href="{{url_for('chitieuhangthang')}}" class="btn-download btn-dow1" style="background:#e1c980; color:black">
-                    <i class='bx bxs-report'></i>
-                    <span class="text">Thêm chi tiêu hàng tháng</span>
-                </a>
                 <a href="{{url_for('giaodich')}}" class="btn-download btn-dow1" style="background:#e1c980; color:black">
                     <i class='bx bxs-report'></i>
                     <span class="text">Thêm giao dịch</span>
@@ -106,25 +102,48 @@
                     <i class='bx bx-filter'></i>
                 </div>
                 <ul class="todo-list">
-                    {%for i in range(n)%}
                     <li class="completed">
-                        <p>{{tenloai[i]}}</p>
+                        <p>Mua sắm</p>
                         <div class="sub_completed">
                             <p class="sub1">Số tiền</p>
-                            <p class="sub2">{{tongtien[i]}}</p>
+                            <p class="sub2">500.000</p>
                         </div>
+
+
                     </li>
-                    {%endfor%}
 
-<!--                    <li class="completed">-->
-<!--                        <p>Mua sắm</p>-->
-<!--                        <div class="sub_completed">-->
-<!--                            <p class="sub1">Số tiền</p>-->
-<!--                            <p class="sub2">500.000</p>-->
-<!--                        </div>-->
+                    <li class="completed">
+                        <p>Mua sắm</p>
+                        <div class="sub_completed">
+                            <p class="sub1">Số tiền</p>
+                            <p class="sub2">500.000</p>
+                        </div>
 
+                    </li>
+                    <li class="completed">
+                        <p>Mua sắm</p>
+                        <div class="sub_completed">
+                            <p class="sub1">Số tiền</p>
+                            <p class="sub2">500.000</p>
+                        </div>
 
-<!--                    </li>-->
+                    </li>
+                    <li class="not-completed">
+                        <p>Mua sắm</p>
+                        <div class="sub_completed">
+                            <p class="sub1">Số tiền</p>
+                            <p class="sub2">500.000</p>
+                        </div>
+
+                    </li>
+                    <li class="completed">
+                        <p>Mua sắm</p>
+                        <div class="sub_completed">
+                            <p class="sub1">Số tiền</p>
+                            <p class="sub2">500.000</p>
+                        </div>
+
+                    </li>
 
                 </ul>
             </div>
@@ -280,7 +299,8 @@
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
 <script>
      const getChart = document.getElementById('myChart');
      let data_ten = [], data_tien = []
@@ -324,7 +344,6 @@
       }
     }
   });
-
 
 </script>
 {%endblock%}
