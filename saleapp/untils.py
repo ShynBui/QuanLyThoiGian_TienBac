@@ -3,7 +3,7 @@ from flask_login import current_user
 from sqlalchemy import func, and_, desc, or_
 from saleapp import app, db
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 import hashlib
 from sqlalchemy.sql import extract
 
@@ -28,11 +28,11 @@ def add_user(name, username, password, diachi, queQuan, **kwargs):
 
     db.session.commit()
     taiKhoan = TaiKhoan()
-    print(taiKhoan)
+    # print(taiKhoan)
     db.session.add_all([taiKhoan])
     db.session.commit()
-    print(diachi)
-    print(queQuan)
+    # print(diachi)
+    # print(queQuan)
     user = User(name=name.strip(), username=username, password=password, email=kwargs.get('email'),diachi=diachi, queQuan=queQuan,
                  dob=kwargs.get('dob'))
     # user2 = User(name="Bui Tien Hoang", username="u1",
@@ -83,14 +83,14 @@ def load_user_send(room_id):
 def get_chatroom_by_user_id(id):
     id_room = Message.query.filter(Message.user_id.__eq__(id))
 
-    print(id_room)
+    # print(id_room)
     return id_room.first()
 
 
 def get_chatroom_by_room_id(id):
     id_room = Message.query.filter(Message.room_id.__eq__(id))
 
-    print(id_room.first())
+    # print(id_room.first())
     return id_room.first()
 
 
@@ -262,7 +262,7 @@ def get_top_loai_chi_tieu(idUser):
                     .group_by(KhoanChiTieu.idLoaiChiTieu)\
                     .limit(5)
 
-    print(loaichitieu.all())
+    # print(loaichitieu.all())
 
     return loaichitieu.all()
 
@@ -338,5 +338,33 @@ def get_top_chi_tieu_gan_day(user_id):
 
     return [ten, time, tien]
 
+def get_ten_chi_tieu_va_tien(idTaiKhoan):
+
+    today = datetime.now() - timedelta(days=1)
+    nextday = today + timedelta(days=1)
+    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == idTaiKhoan)
+
+    list_tien = []
+    list_ten = []
 
 
+    for i in taikhoanchitieu:
+        ten = KhoanChiTieu.query\
+            .filter(KhoanChiTieu.id == i.idkhoanchitieu, KhoanChiTieu.ngayChiTieu.between(today, nextday)).first()
+        if ten:
+            list_ten.append(ten.name)
+            list_tien.append(i.tienChi)
+
+    # print(list_ten, list_tien)
+
+    return [list_ten, list_tien]
+
+
+def add_tien(idTaiKhoan, tien):
+    taikhoan = TaiKhoan.query.filter(TaiKhoan.id == idTaiKhoan).first()
+
+
+    taikhoan.soTien = taikhoan.soTien + tien
+    db.session.commit()
+
+    return True

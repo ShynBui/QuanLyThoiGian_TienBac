@@ -30,8 +30,9 @@
                     </li>
                 </ul>
             </div>
-             <div class="sub_head">
-                 <a href="{{url_for('chitieuhangthang')}}" class="btn-download btn-dow1" style="background:#e1c980; color:black">
+            <div class="sub_head">
+                <a href="{{url_for('chitieuhangthang')}}" class="btn-download btn-dow1"
+                   style="background:#e1c980; color:black">
                     <i class='bx bxs-report'></i>
                     <span class="text">Thêm chi tiêu hàng tháng</span>
                 </a>
@@ -52,21 +53,20 @@
                 <span class="text">
 						<h3>1020</h3>
 						<p>New Order</p>
-					</span>
+                </span>
             </li>
             <li>
                 <i class='bx bxs-group'></i>
                 <span class="text">
-						<h3 style="font-size:20px">Thêm tiền mặt</h3>
-<!--						<p>Tiền mặt: {{sotien}} đ </p>-->
-                     <form method="post" action="/taichinhtuan" style="width:100%; display:flex">
-                         <input min="0" value="500.000" name="sotien" type="number"
-                                       class="form-control status completed" style="width:70%"/>
+                    <h3 style="font-size:20px">Thêm tiền mặt</h3>
+                     <form method="post" action="/process_addtien" style="width:100%; display:flex">
+                         <input min="0" value="0" name="themtien" type="number"
+                                class="form-control status completed" style="width:70%"/>
                         <div class="sub_col" style="width:10%">
-                            <button type="submit" class="btn "><i class='bx bx-plus-circle' ></i></button>
+                            <button type="submit" class="btn "><i class='bx bx-plus-circle'></i></button>
                         </div>
                     </form>
-					</span>
+                </span>
             </li>
             <li>
                 <i class='bx bxs-dollar-circle'></i>
@@ -156,31 +156,17 @@
             </div>
             <div class="todo">
                 <div class="head">
-                    <h3>Kế hoạch cắt giảm chi tiêu</h3>
+                    <h3>Chi tiêu trong ngày</h3>
                     <i class='bx bx-plus'></i>
                     <i class='bx bx-filter'></i>
                 </div>
                 <ul class="todo-list">
+                    {%for i in range(n3)%}
                     <li class="completed">
-                        <p>Todo List</p>
-                        <i class='bx bx-dots-vertical-rounded'></i>
+                        <p>{{ten3[i]}}</p>
+                        <i class='bx bx-dots-vertical-rounded'><p>{{tien3[i]}}</p></i>
                     </li>
-                    <li class="completed">
-                        <p>Todo List</p>
-                        <i class='bx bx-dots-vertical-rounded'></i>
-                    </li>
-                    <li class="not-completed">
-                        <p>Todo List</p>
-                        <i class='bx bx-dots-vertical-rounded'></i>
-                    </li>
-                    <li class="completed">
-                        <p>Todo List</p>
-                        <i class='bx bx-dots-vertical-rounded'></i>
-                    </li>
-                    <li class="not-completed">
-                        <p>Todo List</p>
-                        <i class='bx bx-dots-vertical-rounded'></i>
-                    </li>
+                    {%endfor%}
                 </ul>
             </div>
         </div>
@@ -290,6 +276,10 @@
       }
     }
   });
+
+
+
+
 
 
 </script>
