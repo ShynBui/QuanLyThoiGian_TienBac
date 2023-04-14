@@ -235,7 +235,7 @@ if __name__ == '__main__':
                     idtaikhoan=taiKhoan2.id)
         db.session.add_all([user2])
         db.session.commit()
-        message2 = Message(room_id=room.id, user_id=user.id, content='', date=datetime.now())
+        message2 = Message(room_id=room2.id, user_id=user2.id, content='', date=datetime.now())
         db.session.add_all([message2])
         db.session.commit()
         db.session.commit()

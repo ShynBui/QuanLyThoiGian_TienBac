@@ -1,0 +1,252 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Chat room {% endblock %}
+
+
+{% block content %}
+<img src="{{ url_for('static', filename='images/hero-bg.svg') }}" style="position: absolute; z-index:-1; top:-200px" alt="">
+<img src="{{ url_for('static', filename='images/f.png') }}" style="position: absolute; z-index:-1; bottom:0" alt="">
+<div class="main_chat" style="">
+    <div class="header__chat">
+
+        <img src={{host_avatar}} style="width:40px; border-radius:50px;height:40px; margin-left:10px" alt="">
+        <h1 style="font-size:20px; padding-left:10px; margin:0 auto;">
+            {{room_name}}
+            <b><i data-visualcompletion="css-img" aria-label="Tài khoản đã xác minh" class="" role="img"
+                  style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yt/r/a-Rc8GEsXL2.png&quot;); background-position: -170px -62px; background-size: 190px 186px; width: 16px; height: 16px; background-repeat: no-repeat; display: inline-block;"></i></b>
+        </h1>
+
+
+    </div>
+
+
+    <div class="mid__chat">
+        <path d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"></path>
+        {%for i in range(n)%}
+        {%if current_user.id == user_id[i]%}
+
+        <div style="display: flex;align-items: center;justify-content: flex-end;margin-top:25px">
+
+            <div class="my__text"><b>{{user_send[i]}}</b>: {{message[i + 1].content}}</div>
+            <img src="{{user_image[i]}}" alt="" style="width: 40px;height: 40px;border-radius: 50%;margin-left: 10px;">
+        </div>
+        {%else%}
+
+        <div style="display: flex;align-items: center;justify-content: flex-start;margin-top:25px">
+            <img src="{{user_image[i]}}" alt="" style="width: 40px;height: 40px;border-radius: 50%;margin-right: 10px;">
+            <div class="other__text"><b>{{user_send[i]}}</b>: {{message[i + 1].content}}</div>
+        </div>
+        {%endif%}
+
+        {%endfor%}
+        <div id="messages"></div>
+
+    </div>
+    <div class="bot__chat pb-4">
+        <form id="message_input_form">
+            <input type="text" id="message_input" placeholder="Enter message here"/>
+            <button id="submit" type="submit" name="message"><i class='bx bxs-send bx-lg'></i></button>
+            <div class="emoji">
+
+                <div class="album_emoji">
+                    <div class="boxed">
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+
+
+{%endblock%}
+
+
+{% block css %}
+<link href="{{ url_for('static', filename='css/chatroom.css') }}"
+      rel="stylesheet"/>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{%endblock%}
+
+{%block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+
+<script>
+        const $ = document.querySelector.bind(document)
+        const $$ = document.querySelectorAll.bind(document)
+
+        const btn_changeColorWhite = $(".change__color--white");
+        const btn_changeColorDark = $(".change__color--dark");
+        function onClickChangeColorDark(){
+             const header_chat = $(".header__chat")
+             const mid_chat = $(".mid__chat")
+             const bot_chat = $(".bot__chat")
+             const other_text = $$(".other__text")
+
+             for(let i = 0; i < other_text.length; i++)
+                {
+                    other_text[i].classList.add("other__text--color");
+                }
+
+             header_chat.classList.add("color__black")
+             mid_chat.classList.add("color__black")
+             bot_chat.classList.add("color__black")
+
+        }
+        function onClickChangeColorWhite(){
+             const header_chat = $(".header__chat")
+             const mid_chat = $(".mid__chat")
+             const bot_chat = $(".bot__chat")
+             const other_text = $$(".other__text")
+
+             for(let i = 0; i < other_text.length; i++)
+                {
+                    other_text[i].classList.remove("other__text--color");
+                }
+
+             header_chat.classList.remove("color__black")
+             mid_chat.classList.remove("color__black")
+             bot_chat.classList.remove("color__black")
+
+        }
+
+
+
+
+
+        const album_emojis = $('.album_emoji');
+        const emoji_icon = $('.emoji');
+        const mid_chat = $('.mid__chat');
+        mid_chat.scrollTop = mid_chat.scrollHeight;
+
+        mid_chat.addEventListener('click', onClickMidChat)
+
+        emoji_icon.addEventListener('click', onClickEmojis);
+        const input_value = $('#message_input');
+
+         album_emojis.addEventListener('click', onListClick);
+
+        function onClickEmojis(){
+           album_emojis.style.display = 'flex';
+        }
+        function onClickMidChat(){
+           album_emojis.style.display = 'none';
+        }
+
+          function onListClick(e){
+                var gtri = e.target.getAttribute('data-code');
+
+                const htmls = `${gtri}`
+                input_value.value += htmls;
+
+       }
+
+
+
+        const socket = io.connect("http://127.0.0.1:5000");
+        socket.on('connect', function () {
+
+            socket.emit('join_room', {
+                username: "{{ user_name }}",
+                room: "{{ room }}",
+                room_id: {{room_id}},
+                user_id: {{current_user.id}},
+                user_avatar: "{{current_user.avatar}}"
+            })
+
+            let message_input = document.getElementById('message_input')
+            document.getElementById('message_input_form').onsubmit = function(e) {
+                e.preventDefault();
+                let message = message_input.value.trim();
+                if (message.length) {
+                    socket.emit('send_message', {
+                        username: "{{ user_name }}",
+                        room: "{{ room }}",
+                        message: message,
+                        user_id: {{current_user.id}},
+                        user_avatar: "{{current_user.avatar}}"
+                        })
+                }
+                message_input.value = '';
+                message_input.focus();
+
+                socket.emit('save_message', {
+                    message: message,
+                    room: {{room_id}}
+                    }
+                )
+
+            }
+
+        });
+
+        socket.on('receive_message', function (data) {
+
+            const newNode = document.createElement('div');
+            const avatar = data['user_avatar'].replaceAll('&amp;', '&')
+            const img = document.createElement('img');
+
+
+
+
+            if (data['user_id'] == {{current_user.id}}) {
+                const htmls = `
+                <div style="display: flex;align-items: center;justify-content: flex-end;margin-top:25px">
+                 <div class="my__text ">  <b style="font-size:20px">${data.username}:&nbsp;</b>
+                  <b style="font-size:20px;font-weight:500 !important;">${data.message}</b> </div>
+                  <img src="${data['user_avatar']}" style="width: 40px;height: 40px;border-radius: 50%;margin-left: 10px;" alt="">
+                </div>
+                `;
+                newNode.innerHTML = htmls;
+            }
+            else {
+                 const mid_chat = $(".mid__chat");
+                 if(mid_chat.classList.contains("color__black")){
+                         const htmls = `
+                    <div style="display: flex;align-items: center;justify-content: flex-start; margin-top:25px">
+                      <img src="${data['user_avatar']}" style="width: 40px;height: 40px;border-radius: 50%;margin-right: 20px;" alt="">
+                     <div class="other__text other__text--color">  <b style="font-size:20px">${data.username}:&nbsp;</b>
+                      <b style="font-size:20px;font-weight:500 !important;">${data.message}</b> </div>
+                    </div>
+                    `;
+                    newNode.innerHTML = htmls;
+                  }
+                 else{
+                     const htmls = `
+                    <div style="display: flex;align-items: center;justify-content: flex-start; margin-top:25px">
+                      <img src="${data['user_avatar']}" style="width: 40px;height: 40px;border-radius: 50%;margin-right: 20px;" alt="">
+                     <div class="other__text">  <b style="font-size:20px">${data.username}:&nbsp;</b>
+                      <b style="font-size:20px;font-weight:500 !important;">${data.message}</b> </div>
+                    </div>
+                    `;
+                    newNode.innerHTML = htmls;
+                 }
+            }
+            document.getElementById('messages').appendChild(newNode);
+
+            let all_message = document.getElementById('messages')
+
+            mid_chat.scrollTop+=160;
+        });
+        socket.on('join_room_announcement', function (data) {
+            console.log(data);
+            const newNode = document.createElement('div')
+            newNode.innerHTML = data['username'] + ' has join the room'
+            document.getElementById('messages').appendChild(newNode);
+        });
+
+
+
+
+
+		!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+
+</script>
+
+
+</script>
+<script src="{{ url_for('static', filename='js/chatroom.js') }}"></script>
+{%endblock%}
