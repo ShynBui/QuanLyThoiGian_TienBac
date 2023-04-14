@@ -182,6 +182,7 @@ class TaiKhoanChiTieu(db.Model):
     idkhoanchitieu = Column(Integer, ForeignKey(KhoanChiTieu.id), nullable=False, primary_key=True)
     idtaikhoan = Column(Integer, ForeignKey(TaiKhoan.id), nullable=False, primary_key=True)
     tienChi = Column(Float)
+    note = Column(Text)
 
     def __str__(self):
         return self.idkhoanchitieu
