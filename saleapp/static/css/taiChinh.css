@@ -520,7 +520,14 @@ body {
 
 
 
-
+.form-control{
+    border:none;
+    background:#fff;
+    justify-content:space-between;
+}
+.sub_col{
+    width:20%;
+}
 
 
 

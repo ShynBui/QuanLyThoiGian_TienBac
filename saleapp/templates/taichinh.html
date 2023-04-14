@@ -57,8 +57,15 @@
             <li>
                 <i class='bx bxs-group'></i>
                 <span class="text">
-						<h3>Ví của tôi</h3>
-						<p>Tiền mặt: {{sotien}} đ </p>
+						<h3 style="font-size:20px">Thêm tiền mặt</h3>
+<!--						<p>Tiền mặt: {{sotien}} đ </p>-->
+                     <form method="post" action="/taichinhtuan" style="width:100%; display:flex">
+                         <input min="0" value="500.000" name="sotien" type="number"
+                                       class="form-control status completed" style="width:70%"/>
+                        <div class="sub_col" style="width:10%">
+                            <button type="submit" class="btn "><i class='bx bx-plus-circle' ></i></button>
+                        </div>
+                    </form>
 					</span>
             </li>
             <li>
