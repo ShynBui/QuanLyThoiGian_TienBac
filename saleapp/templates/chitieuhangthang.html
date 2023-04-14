@@ -102,10 +102,10 @@
                         <br>
                         <div class="control">
                             <div class="edit_control">
-                                <button class="btn btn-warning" type="">
+
                                     Edit
                                     <i class='bx bxs-save'></i>
-                                </button>
+
 
 
                             </div>
@@ -155,7 +155,15 @@
     <!-- MAIN -->
 </section>
 <!-- CONTENT -->
+<script>
 
+    const control = document.querySelector(".edit_control");
+const submitControl = document.querySelector(".submit_control");
+
+control.addEventListener("click", function() {
+  submitControl.style.display = "inline-block";
+});
+</script>
 <script src="{{ url_for('static', filename='js/taiChinh.js') }}"></script>
 
 {%endblock%}
