@@ -202,6 +202,12 @@ def user_signout():
 def user_load(user_id):
     return untils.get_user_by_id(user_id=user_id)
 
+@app.route('/taichinh')
+def taichinh():
+
+    sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
+    return render_template('taichinh.html', sotien=str(sotien))
+#Tài khoản
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
