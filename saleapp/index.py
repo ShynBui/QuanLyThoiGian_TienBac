@@ -228,9 +228,18 @@ def taichinh():
     ten = data[0]
     tien = data[1]
 
+    #Chi tieu gan day
+
+    chitieuganday = untils.get_top_chi_tieu_gan_day(current_user.idtaikhoan)
+
+    ten2 = chitieuganday[0]
+    time2 = chitieuganday[1]
+    tien2 = chitieuganday[2]
+
     sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
     return render_template('taichinh.html', sotien=str(sotien), topchitieu=topchitieu, tenloai=ten,
-                           n=len(tenloai), tongtien=tien)
+                           n=len(tenloai), tongtien=tien, chitieuganday=chitieuganday,
+                           ten2=ten2, time2=time2, tien2=tien2, n2=len(ten2))
 
 @app.route('/taichinhtuan', methods=['get', 'post'])
 def taichinh_tuan():
@@ -253,9 +262,18 @@ def taichinh_tuan():
     ten = data[0]
     tien = data[1]
 
+    #Chi tieu gan day
+
+    chitieuganday = untils.get_top_chi_tieu_gan_day(current_user.idtaikhoan)
+
+    ten2 = chitieuganday[0]
+    time2 = chitieuganday[1]
+    tien2 = chitieuganday[2]
+
     return render_template('taichinh.html', sotien=str(sotien), tien= tientuannay,
                            ten=['Tuần trước', 'Tuần này'], topchitieu=topchitieu, tenloai=ten,
-                           n=len(tenloai), tongtien=tien)
+                           n=len(tenloai), tongtien=tien, chitieuganday=chitieuganday,
+                           ten2=ten2, time2=time2, tien2=tien2, n2=len(ten2))
 
 @app.route('/taichinhthang', methods=['get', 'post'])
 def taichinh_thang():
@@ -278,10 +296,19 @@ def taichinh_thang():
     ten = data[0]
     tien = data[1]
 
+    #Chi tieu gan day
+
+    chitieuganday = untils.get_top_chi_tieu_gan_day(current_user.idtaikhoan)
+
+    ten2 = chitieuganday[0]
+    time2 = chitieuganday[1]
+    tien2 = chitieuganday[2]
+
 
     return render_template('taichinh.html', sotien=str(sotien), tien= tientuannay,
                            ten=['Tháng trước', 'Tháng này'], topchitieu=topchitieu, tenloai=ten,
-                           n=len(tenloai), tongtien=tien)
+                           n=len(tenloai), tongtien=tien, chitieuganday=chitieuganday,
+                           ten2=ten2, time2=time2, tien2=tien2, n2=len(ten2))
 
 @app.route('/giaodich', methods=['post', 'get'])
 def giaodich():
@@ -306,8 +333,8 @@ def giaodich():
             untils.add_giao_dich(current_user.idtaikhoan, int(loai), float(sotien),
                                  int(nhom), note, datetime.strptime(ngay, '%Y-%m-%d').date(), name)
 
-            sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
-            return render_template('taichinh.html', sotien=str(sotien))
+            # sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
+            return redirect(url_for('taichinh'))
 
         all_loai = untils.get_all_loai_theo_nhom(nhom)
 

@@ -305,3 +305,38 @@ def sort_ten_tongtien(ten, tongtien):
                 ten[j] = temp
 
     return [ten, tongtien]
+
+def get_tien_by_idkhoanchitieu(id):
+
+    return TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idkhoanchitieu == id).first().tienChi
+def get_top_chi_tieu_gan_day(user_id):
+
+    chitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == user_id).all()
+
+    id_chitieu = []
+
+    for i in chitieu:
+        id_chitieu.append(i.idkhoanchitieu)
+
+    # print(id_chitieu)
+
+    chitieuganday = KhoanChiTieu.query.filter(KhoanChiTieu.id.in_(id_chitieu))\
+                    .order_by(KhoanChiTieu.ngayChiTieu.desc()).limit(5).all()
+
+    ten = []
+    time = []
+    tien = []
+
+
+    for i in chitieuganday:
+        ten.append(i.name)
+        time.append(i.ngayChiTieu)
+        tien.append(get_tien_by_idkhoanchitieu(i.id))
+
+    # print(ten)
+
+
+    return [ten, time, tien]
+
+
+
