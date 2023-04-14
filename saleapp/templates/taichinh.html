@@ -111,17 +111,6 @@
                         </div>
                     </li>
                     {%endfor%}
-
-<!--                    <li class="completed">-->
-<!--                        <p>Mua sắm</p>-->
-<!--                        <div class="sub_completed">-->
-<!--                            <p class="sub1">Số tiền</p>-->
-<!--                            <p class="sub2">500.000</p>-->
-<!--                        </div>-->
-
-
-<!--                    </li>-->
-
                 </ul>
             </div>
         </div>
@@ -141,46 +130,16 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {%for i in range(n2)%}
                     <tr>
                         <td>
                             <img src="img/people.png">
-                            <p>Ăn uống</p>
+                            <p>{{ten2[i]}}</p>
                         </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status completed">500.000</span></td>
+                        <td>{{time2[i]}}</td>
+                        <td><span class="status completed">{{tien2[i]}}</span></td>
                     </tr>
-                    <tr>
-                        <td>
-                            <img src="img/people.png">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="img/people.png">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status process">Process</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="img/people.png">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="img/people.png">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status completed">Completed</span></td>
-                    </tr>
+                    {%endfor%}
                     </tbody>
                 </table>
             </div>
