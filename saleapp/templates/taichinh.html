@@ -30,10 +30,16 @@
                     </li>
                 </ul>
             </div>
-            <a href="#" class="btn-download">
-                <i class='bx bxs-report'></i>
-                <span class="text">Xem báo cáo</span>
-            </a>
+             <div class="sub_head">
+                <a href="{{url_for('giaodich')}}" class="btn-download btn-dow1" style="background:#e1c980; color:black">
+                    <i class='bx bxs-report'></i>
+                    <span class="text">Thêm giao dịch</span>
+                </a>
+                <a href="#" class="btn-download">
+                    <i class='bx bxs-report'></i>
+                    <span class="text">Xem báo cáo</span>
+                </a>
+            </div>
         </div>
 
         <ul class="box-info">
@@ -68,13 +74,13 @@
                     <i class='bx bx-search'></i>
                     <i class='bx bx-filter'></i>
                 </div>
-                <div class="row justify-content-between">
-                    <form method="post" action="/taichinhtuan">
+                <div class="row ">
+                    <form method="post" action="/taichinhtuan" style="width:50%">
                         <div class="col-auto sub_col">
                             <button type="submit" class="btn btn-primary sub_btn">Tuần</button>
                         </div>
                     </form>
-                    <form method="post" action="/taichinhthang">
+                    <form method="post" action="/taichinhthang" style="width:50%">
                         <div class="col-auto sub_col">
                             <button type="submit" class="btn btn-success sub_btn">Tháng</button>
                         </div>
