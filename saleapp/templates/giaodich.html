@@ -9,7 +9,11 @@
     <form id="myForm" method="post" action="/giaodich">
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Số tiền</label>
-            <input value="{{sotien}}" name="sotien" type="number" class="form-control"> đ
+            <input id="tien" min="0" value="{{sotien}}" name="sotien" type="number" class="form-control"> đ
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Tên giao dịch</label>
+            <input value="{{name}}" name="name" type="text" class="form-control">
         </div>
         <div class="mb-3">
             <label class="form-label">Chọn nhóm</label>
@@ -43,16 +47,18 @@
             <label for="exampleFormControlInput1" class="form-label">Hôm nay</label>
             <input value="{{date}}" id="myDate" name="ngay" type="date" class="form-control" id="exampleFormControlInput1">
         </div>
-        <a class="btn btn-primary" href="{{url_for('process_giaodich')}}">
-            Save
-        </a>
+        <button class="btn btn-primary" type="submit">
+                Save
+        </button>
 
     </form>
 </div>
 
 <script>
     document.getElementById("myDropdown").addEventListener("change", function() {
+    document.getElementById("tien").value = 0;
   document.getElementById("myForm").submit();
+
 });
 
 
