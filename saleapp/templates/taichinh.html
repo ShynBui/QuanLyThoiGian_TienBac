@@ -30,10 +30,17 @@
                     </li>
                 </ul>
             </div>
-            <a href="#" class="btn-download">
-                <i class='bx bxs-report'></i>
-                <span class="text">Xem báo cáo</span>
-            </a>
+
+            <div class="sub_head">
+                <a href="{{url_for('giaodich')}}" class="btn-download btn-dow1" style="background:#e1c980; color:black">
+                    <i class='bx bxs-report'></i>
+                    <span class="text">Thêm giao dịch</span>
+                </a>
+                <a href="#" class="btn-download">
+                    <i class='bx bxs-report'></i>
+                    <span class="text">Xem báo cáo</span>
+                </a>
+            </div>
         </div>
 
         <ul class="box-info">
@@ -68,24 +75,24 @@
                     <i class='bx bx-search'></i>
                     <i class='bx bx-filter'></i>
                 </div>
-                    <form>
-                        <div class="row justify-content-between">
-                            <div class="col-auto sub_col" >
-                                <button type="submit" class="btn btn-primary sub_btn">Tuần</button>
-                            </div>
-                            <div class="col-auto sub_col">
-                                <button type="submit" class="btn btn-success sub_btn">Tháng</button>
-                            </div>
+                <form>
+                    <div class="row justify-content-between">
+                        <div class="col-auto sub_col">
+                            <button type="submit" class="btn btn-primary sub_btn">Tuần</button>
                         </div>
-                    </form>
+                        <div class="col-auto sub_col">
+                            <button type="submit" class="btn btn-success sub_btn">Tháng</button>
+                        </div>
+                    </div>
+                </form>
 
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <th>Date Order</th>-->
-<!--                        <th>Status</th>-->
-<!--                    </tr>-->
+                <!--                    <tr>-->
+                <!--                        <th>User</th>-->
+                <!--                        <th>Date Order</th>-->
+                <!--                        <th>Status</th>-->
+                <!--                    </tr>-->
 
-                     <div id="Mychart">Để biểu đồ vô đây</div>
+                <div id="Mychart">Để biểu đồ vô đây</div>
 
 
             </div>
@@ -104,7 +111,9 @@
                             <p class="sub2">500.000</p>
                         </div>
 
+
                     </li>
+
                     <li class="completed">
                         <p>Mua sắm</p>
                         <div class="sub_completed">
@@ -273,7 +282,7 @@
                 <div>Tổng chi tuần/tháng này</div>
             </div>
 
-<!--            <div id="Mychart">Để biểu đồ vô đây</div>-->
+            <!--            <div id="Mychart">Để biểu đồ vô đây</div>-->
 
             <div>Chi tiêu nhiều nhất (List các loại chi tiêu)</div>
 

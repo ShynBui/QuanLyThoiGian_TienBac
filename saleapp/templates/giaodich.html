@@ -2,10 +2,15 @@
 
 {% block title %} Chat room {% endblock %}
 
-
+{% block css %}
+<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/giaodich.css') }}">
+{%endblock%}
 {% block content %}
 
-<div>
+<div class="container">
+    <h1>Thêm giao dịch</h1>
+    <div>
     <form id="myForm" method="post" action="/giaodich">
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Số tiền</label>
@@ -54,10 +59,11 @@
     </form>
 </div>
 
+</div>
 <script>
     document.getElementById("myDropdown").addEventListener("change", function() {
     document.getElementById("tien").value = 0;
-  document.getElementById("myForm").submit();
+    document.getElementById("myForm").submit();
 
 });
 

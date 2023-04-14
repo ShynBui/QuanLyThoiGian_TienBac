@@ -7,7 +7,7 @@
 }
 
 a {
-	text-decoration: none;
+	text-decoration: none !important;
 }
 
 li {
@@ -608,4 +608,17 @@ body {
 }
 .sub_btn{
     width: 100% !important;
+}
+.sub_head{
+    display:flex;
+}
+.sub_head a{
+    margin-right:10px;
+}
+.btn-dow1{
+    transition:0.5s;
+}
+.btn-dow1:hover{
+    background: #ffc107 !important;
+
 }

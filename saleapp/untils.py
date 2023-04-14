@@ -27,15 +27,15 @@ def add_user(name, username, password, diachi, queQuan, **kwargs):
     # print(maso)
 
     db.session.commit()
-    taiKhoan3 = TaiKhoan()
-    print(taiKhoan3.id)
-    db.session.add_all([taiKhoan3])
+    taiKhoan = TaiKhoan()
+    print(taiKhoan)
+    db.session.add_all([taiKhoan])
     db.session.commit()
     print(diachi)
     print(queQuan)
     user = User(name=name.strip(), username=username, password=password, email=kwargs.get('email'),diachi=diachi, queQuan=queQuan,
                  avatar=kwargs.get('avatar'), userRole=UserRole.USER,
-                dob=kwargs.get('dob'), idTaiKhoan=taiKhoan3.id)
+                dob=kwargs.get('dob'), idTaiKhoan=taiKhoan.id)
     # user2 = User(name="Bui Tien Hoang", username="u1",
     #             password=password,
     #             avatar='https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/191455455_1236939360069997_5418463114445577817_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=rcajabo0f74AX9qvH8y&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfBoXfETYQ2MJIS8cYaTUQDAix3LXAwX2UK0Vz-P8P1M1w&oe=645FD60B',
@@ -47,6 +47,7 @@ def add_user(name, username, password, diachi, queQuan, **kwargs):
 
 
     db.session.add(user)
+
     db.session.commit()
 
     room = Room(name="Room của " + name.strip())
