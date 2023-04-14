@@ -382,7 +382,18 @@ def giaodich():
 
 @app.route('/chitieuhangthang', methods=['post', 'get'])
 def chitieuhangthang():
-    return render_template('chitieuhangthang.html')
+
+
+    tennhom = untils.get_all_nhom()
+
+    chitieu = []
+
+    for i in tennhom:
+        chitieu.append(untils.get_all_loai_theo_nhom(i.id))
+
+    # print(chitieu)
+
+    return render_template('chitieuhangthang.html', chitieu=chitieu, tennhom=tennhom, n=len(tennhom))
 
 @app.route("/profile", methods=['post', 'get'])
 def profile_user():
