@@ -162,3 +162,11 @@ def get_all_loai_theo_nhom(id_nhom):
     loai = LoaiChiTieu.query.filter(LoaiChiTieu.idnhomchitieu == id_nhom)
 
     return loai.all()
+
+def add_giao_dich(idtaikhoan, idkhoanchitieu, sotien, idnhomchitieu, note, ngay):
+
+    taikhoanchitieu = TaiKhoanChiTieu(idkhoanchitieu=idkhoanchitieu, idtaikhoan=idtaikhoan, tienChi=sotien)
+
+    db.session.add(taikhoanchitieu)
+    db.session.commit()
+

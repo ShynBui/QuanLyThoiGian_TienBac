@@ -9,6 +9,15 @@ import requests
 import openpyxl
 from datetime import datetime, date
 
+giaodich = {
+    "idtaikhoan": 0,
+    "idnhomchitieu": 0,
+    "idloaichitieu": 0,
+    "ngay": 0,
+    "note": '',
+    "sotien": 0
+}
+
 @app.route("/")
 def home():
     return render_template('index.html')
@@ -226,11 +235,18 @@ def giaodich():
         if ngay == '':
             ngay = '2023-04-15'
         if not loai:
-            loai = '0'
+            loai = 0
         if nhom == '':
             nhom = 0
 
         print(loai, ngay, nhom, sotien)
+
+        giaodich["idtaikhoan"] = current_user.idtoaikhoan
+        giaodich["idloaichitieu"] = loai
+        giaodich["idnhomchitieu"] = nhom
+        giaodich["sotien"] = sotien
+        giaodich["note"] = note
+        giaodich["ngay"] = ngay
 
         all_loai =untils.get_all_loai_theo_nhom(nhom)
 
