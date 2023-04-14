@@ -203,10 +203,12 @@ def get_all_tien_tuan_truoc_va_tuan_nay(idtaikhoan):
     taikhoanchitieutuantruoc = []
 
     for i in khoanchitieutuannay:
-        taikhoanchitieutuannay.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu).first())
+        taikhoanchitieutuannay.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).first())
 
     for i in khoanchitieutuantruoc:
-        taikhoanchitieutuantruoc.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu).first())
+        taikhoanchitieutuantruoc.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).first())
 
     tongtienchituannay = 0
     tongtienchituantruoc = 0
@@ -232,10 +234,12 @@ def get_all_tien_thang_truoc_va_thang_nay(idtaikhoan):
     taikhoanchitieutuantruoc = []
 
     for i in khoanchitieutuannay:
-        taikhoanchitieutuannay.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu).first())
+        taikhoanchitieutuannay.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).first())
 
     for i in khoanchitieutuantruoc:
-        taikhoanchitieutuantruoc.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu).first())
+        taikhoanchitieutuantruoc.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).first())
 
     tongtienchituannay = 0
     tongtienchituantruoc = 0
@@ -251,7 +255,8 @@ def get_all_tien_thang_truoc_va_thang_nay(idtaikhoan):
     return [tongtienchituantruoc, tongtienchituannay]
 
 def get_top_loai_chi_tieu(idUser):
-    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == idUser).all()
+    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == idUser,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).all()
 
     my_list = [x.idkhoanchitieu for x in taikhoanchitieu]
 
@@ -283,7 +288,8 @@ def get_tong_tien_theo_id_loai(idLoai):
     for i in id:
         list_id.append(i.id)
 
-    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idkhoanchitieu.in_(list_id)).all()
+    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idkhoanchitieu.in_(list_id),
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).all()
 
     sotien = 0
 
@@ -308,10 +314,12 @@ def sort_ten_tongtien(ten, tongtien):
 
 def get_tien_by_idkhoanchitieu(id):
 
-    return TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idkhoanchitieu == id).first().tienChi
+    return TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idkhoanchitieu == id,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).first().tienChi
 def get_top_chi_tieu_gan_day(user_id):
 
-    chitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == user_id).all()
+    chitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == user_id,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).all()
 
     id_chitieu = []
 
@@ -342,7 +350,8 @@ def get_ten_chi_tieu_va_tien(idTaiKhoan):
 
     today = datetime.now() - timedelta(days=1)
     nextday = today + timedelta(days=1)
-    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == idTaiKhoan)
+    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == idTaiKhoan,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False))
 
     list_tien = []
     list_ten = []
@@ -368,3 +377,24 @@ def add_tien(idTaiKhoan, tien):
     db.session.commit()
 
     return True
+
+def get_all_nhom_va_loai_chi_tieu():
+
+    nhom = db.session.query(LoaiChiTieu.name.label('tenloai'), LoaiChiTieu.image, NhomChiTieu.name.label('tennhom'))\
+            .join(LoaiChiTieu, NhomChiTieu.id == LoaiChiTieu.idnhomchitieu)\
+            .order_by(NhomChiTieu.id).all()
+
+    print(nhom)
+
+    return nhom
+
+def get_loai_chi_tieu_theo_nhom_id(nhomid):
+
+    loaichitieu = LoaiChiTieu.query.filter(LoaiChiTieu.idnhomchitieu == nhomid).all()
+
+    return loaichitieu
+
+def get_all_loai():
+    loai = LoaiChiTieu.query.all()
+
+    return loai

@@ -185,6 +185,7 @@ class TaiKhoanChiTieu(db.Model):
     idtaikhoan = Column(Integer, ForeignKey(TaiKhoan.id), nullable=False, primary_key=True)
     tienChi = Column(Float)
     note = Column(Text)
+    isRecoment = Column(Boolean, default=False)
 
     def __str__(self):
         return self.idkhoanchitieu
@@ -292,7 +293,7 @@ if __name__ == '__main__':
 
         # user
         # tk: u2
-        # mk: 1
+# mk: 1
         room2 = Room(name='ccv', is_reply=False, date=datetime.now())
         db.session.add_all([room2])
         db.session.commit()
