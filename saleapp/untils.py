@@ -1,4 +1,4 @@
-from saleapp.models import User, UserRole, Room, Message
+from saleapp.models import User, UserRole, Room, Message, TaiKhoan, LoaiChiTieu, NhomChiTieu, TaiKhoanChiTieu, KhoanChiTieu
 from flask_login import current_user
 from sqlalchemy import func, and_, desc, or_
 from saleapp import app, db
@@ -146,3 +146,9 @@ def get_chatroom_by_id(id):
     # id_room[0]
 
     return id_room.first();
+
+
+def get_tai_khoan_tai_chinh(id_taikhoan):
+    taichinh = TaiKhoan.query.filter(TaiKhoan.id.__eq__(id_taikhoan))
+
+    return taichinh.first()

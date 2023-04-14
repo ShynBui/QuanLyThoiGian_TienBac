@@ -205,7 +205,8 @@ def user_load(user_id):
 @app.route('/taichinh')
 def taichinh():
 
-    return render_template('taichinh.html')
+    sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
+    return render_template('taichinh.html', sotien=str(sotien))
 #Tài khoản
 
 if __name__ == '__main__':
