@@ -198,3 +198,30 @@ def add_giao_dich(idtaikhoan, idloaichitieu, sotien, idnhomchitieu, note, ngay, 
 
     db.session.commit()
 
+def get_all_tien_tuan_truoc_va_tuan_nay(idtaikhoan):
+    khoanchitieutuannay = KhoanChiTieu.query.filter(extract('week', KhoanChiTieu.ngayChiTieu) == datetime.now().isocalendar()[1]).all()
+    khoanchitieutuantruoc = KhoanChiTieu.query.filter(extract('week', KhoanChiTieu.ngayChiTieu) == datetime.now().isocalendar()[1] - 1).all()
+
+    taikhoanchitieutuannay = []
+    taikhoanchitieutuantruoc = []
+
+    for i in khoanchitieutuannay:
+        taikhoanchitieutuannay.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu).first())
+
+    for i in khoanchitieutuantruoc:
+        taikhoanchitieutuantruoc.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu).first())
+
+    tongtienchituannay = 0
+    tongtienchituantruoc = 0
+
+    for i in taikhoanchitieutuannay:
+        tongtienchituannay = tongtienchituannay + i.tienChi
+
+    for i in taikhoanchitieutuantruoc:
+        tongtienchituantruoc = tongtienchituantruoc + i.tienChi
+
+    # print("a:", tongtienchituantruoc, "b:", tongtienchituannay)
+
+    return [tongtienchituantruoc, tongtienchituannay]
+
+

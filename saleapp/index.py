@@ -217,6 +217,15 @@ def taichinh():
     sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
     return render_template('taichinh.html', sotien=str(sotien))
 
+@app.route('/taichinhtuan', methods=['get', 'post'])
+def taichinh_tuan():
+
+    sotien = untils.get_tai_khoan_tai_chinh(current_user.idtaikhoan).soTien
+
+    tientuannay = untils.get_all_tien_tuan_truoc_va_tuan_nay(current_user.idtaikhoan)
+
+    return render_template('taichinh.html', sotien=str(sotien), tien= tientuannay)
+
 @app.route('/giaodich', methods=['post', 'get'])
 def giaodich():
 
