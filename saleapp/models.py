@@ -318,7 +318,6 @@ if __name__ == '__main__':
         db.session.commit()
 
 
-<<<<<<< HEAD
         #priority
 
         pri1 = Priority(name="Hard", mucDo=1)
@@ -329,6 +328,3 @@ if __name__ == '__main__':
         db.session.commit()
 
         db.session.commit()
-=======
-        db.session.commit()
->>>>>>> refs/remotes/origin/main
