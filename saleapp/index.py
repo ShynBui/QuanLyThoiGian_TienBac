@@ -408,7 +408,10 @@ def chitieuhangthang():
     for i in chitieu:
         temp = []
         for j in i:
-            temp.append(round(untils.get_tong_tien_theo_id_loai(j.id) / tongTien, 2) * 100)
+            try:
+                temp.append(round(untils.get_tong_tien_theo_id_loai(j.id) / tongTien, 2) * 100)
+            except:
+                temp.append(0)
         phepChia.append(temp)
 
     # print(tien)
