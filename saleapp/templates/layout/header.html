@@ -10,16 +10,16 @@
     />
  {%endblock%}
 <header>
-        <nav class="navbar">
+        <nav class="navbar justify-content-center">
           <!-- logo -->
 
           <!-- links -->
-          <ul class="navbar__links">
+          <ul class="navbar__links justify-content-between">
               {%if current_user.is_authenticated %}
 
             <li class="navbar__link"><a href="{{url_for('home')}}">Trang chủ</a></li>
             <li class="navbar__link"><a href="{{url_for('taichinh')}}">Quản lý tài chính</a></li>
-            <li class="navbar__link"><a href="#">Sắp xếp thời gian biểu</a></li>
+            <li class="navbar__link"><a href="{{url_for('calendar')}}">Sắp xếp thời gian biểu</a></li>
             <li class="navbar__link"><a href="{{url_for('chat_room')}}">Hỗ trợ trực tuyến</a></li>
             <li class="navbar__link">
                 <a class="" href="{{url_for('profile_user')}}">

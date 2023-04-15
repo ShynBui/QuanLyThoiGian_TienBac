@@ -10,11 +10,8 @@ import openpyxl
 from saleapp.decoding import decoding_no1
 from datetime import datetime, date
 
-<<<<<<< HEAD:index.py
 from saleapp.time import *
-=======
 import feedparser
->>>>>>> refs/remotes/origin/main:saleapp/index.py
 
 @app.route("/")
 def home():
