@@ -392,3 +392,4 @@ def get_all_loai():
     loai = LoaiChiTieu.query.all()
 
     return loai
+

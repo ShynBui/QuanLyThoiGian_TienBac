@@ -39,26 +39,25 @@
                             <th>
                                 Đã dùng
                             </th>
-                            <th>Số tiền</th>
+                            <th>Tỉ lệ</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {%for j in chitieu[i]%}
+                        {%for j in range(subN)%}
                         <tr>
                             <td>
-                                <img src="{{j.image}}">
-                                <p>{{j.name}}</p>
+                                <img src="{{chitieu[i][j].image}}">
+                                <p>{{chitieu[i][j].name}}</p>
                             </td>
                             <td>
-                                <progress value="32" max="100"> 32%</progress>
+                                <progress value="{{tien[i][j]}}" max="{{tongTien}}">{{tien[i][j]}} / {{tongTien}}</progress>
                             </td>
                             <td>
-                                <input style="margin-left:40px" min="0" value="500.000" name="" type="number"
+                                <input style="margin-left:40px" min="0" value="{{tien[i][j]}}" name="" type="number"
                                        class="form-control status completed">
                             </td>
                             <td>
-                                <input style="margin-left:40px" min="0" value="500.000" name="sotien" type="number"
-                                       class="form-control status completed">
+                                <span>{{phepChia[i][j]}}%</span>
                             </td>
                         </tr>
                         {%endfor%}
