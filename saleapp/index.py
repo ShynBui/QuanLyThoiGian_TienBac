@@ -10,6 +10,8 @@ import openpyxl
 from saleapp.decoding import decoding_no1
 from datetime import datetime, date
 
+import feedparser
+
 @app.route("/")
 def home():
     return render_template('index.html')
@@ -437,7 +439,21 @@ def profile_user():
 
     return render_template('profile.html', profile=profile, ten=ten[1:], ho=ho, taikhoan=taikhoan)
 
+# CHATBOT
+# @app.route('/chatbot', methods=["get"])
+# def chatbot():
+#     return render_template('tintuc.html')
+#
+# @app.route('/getBotResponse', methods=['post'])
+# def chatbot_response():
+#     msg = request.form["msg"]
+#     response = chatbot.get_response(msg)
+#     return str(response)
 
+@app.route('/rss', methods=['get'])
+def getRSS():
+    feed = feedparser.parse('https://mof.gov.vn/webcenter/rss?muchienthiId=1908')
+    return render_template('tintuc.html', article=feed['entries'])
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
