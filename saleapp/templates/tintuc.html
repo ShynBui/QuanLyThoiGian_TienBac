@@ -1,0 +1,18 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Tin tức {% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block script %}
+<script>
+    let listArticle = [];
+
+    {% for i in article %}
+        listArticle.push('{{i}}');
+    {% endfor %}
+    console.log(listArticle);
+</script>
+{% endblock %}
