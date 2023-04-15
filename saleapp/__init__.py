@@ -11,7 +11,7 @@ from joblib import dump, load
 app = Flask(__name__)
 
 app.secret_key = '689567gh$^^&*#%^&*^&%^*DFGH^&*&*^*'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Admin123@localhost/quanlythoigian?charset=utf8mb4'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/quanlythoigian?charset=utf8mb4'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 

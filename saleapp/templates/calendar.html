@@ -1,0 +1,236 @@
+{% extends 'layout/base.html' %} {% block title %} Calendar {% endblock %} {% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/evo-calendar.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/evo-calendar.midnight-blue.css') }}" />
+{% endblock %} {% block content %}
+<div id="calendar"></div>
+<br />
+<div id="action" class="m-auto" style="width: fit-content">
+    <button type="button" id="btn-voice-start" class="btn btn-outline-primary rounded-pill">Voice</button>
+    <button type="button" id="btn-voice-stop" class="btn btn-outline-primary rounded-pill">Voice stop</button>
+    <button
+        type="button"
+        id="btn-add-event"
+        class="btn btn-outline-success"
+        data-bs-toggle="modal"
+        data-bs-target="#add-event-modal"
+    >
+        Thêm sự kiện
+    </button>
+    <button id="btn-rm-event" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rm-event-modal">
+        Xoá sự kiện
+    </button>
+</div>
+<div class="m-auto" style="width: fit-content">
+    <span id="voice-inp"></span>
+</div>
+<br />
+<div class="modal fade" id="add-event-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Thêm sự kiện</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form-add-event" action="/create_task" method="post">
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Tên sự kiện</span>
+                        <input name="name" id="ten-su-kien" type="text" aria-label="First name" class="form-control" />
+                        <select name="task" class="form-select" id="loai-su-kien">
+                            <option value="1">Sự kiện</option>
+                            <option value="2">Việc cần làm</option>
+                            <option value="3">Lời nhắc</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Thời gian bắt đầu</span>
+                        <input name="startAt" id="startAt" type="time" aria-label="First name" class="form-control" />
+                        <span class="input-group-text">Thời gian kết thúc</span>
+                        <input name="deadline" id="deadline" type="time" aria-label="First name" class="form-control" />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-text">
+                            <input
+                                class="form-check-input mt-0"
+                                type="checkbox"
+                                value=""
+                                aria-label="Checkbox for following text input"
+                            />
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            aria-label="Text input with checkbox"
+                            value="Lặp lại lời nhắc"
+                            disabled
+                        />
+                        <span class="input-group-text">Khoảng thời gian (phút)</span>
+                        <input name="loop" id="loop" type="number" aria-label="First name" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
+                        <textarea
+                            name="des"
+                            id="mo-ta-su-kien"
+                            class="form-control"
+                            id="exampleFormControlTextarea1"
+                            rows="3"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="rm-event-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Xoá sự kiện</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form-rm-event">
+                <div class="modal-body" id="form-rm-list-event">
+                    <div class="input-group mb-3">
+                        <div class="input-group-text">
+                            <input
+                                class="form-check-input mt-0"
+                                type="checkbox"
+                                value=""
+                                aria-label="Checkbox for following text input"
+                            />
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            aria-label="Text input with checkbox"
+                            value="thi"
+                            disabled
+                        />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/evo-calendar.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        const CALENDAR = $('#calendar');
+        var gid = 1;
+        var recognition;
+
+        // lấy từ db
+        var CALENDAR_EVENT = [
+            {
+                id: (gid++).toString(),
+                name: 'Thi',
+                description: 'Giải pháp phần mềm 24h',
+                badge: 'Sự kiện',
+                date: '15/April/2023',
+                type: 'event',
+            },
+            {
+                id: (gid++).toString(),
+                name: 'Đi siêu thị',
+                description: 'Mua sắm',
+                badge: 'Việc cần làm',
+                date: '16/April/2023',
+                type: 'event',
+            },
+        ];
+
+        console.log(CALENDAR_EVENT);
+
+        // tạo calendar
+        CALENDAR.evoCalendar({
+            firstDayOfWeek: 1,
+            language: 'vi',
+            format: 'dd/MM/yyyy',
+            titleFormat: 'MM - yyyy',
+            eventHeaderFormat: 'dd MM, yyyy',
+            todayHighlight: true,
+            calendarEvents: CALENDAR_EVENT,
+        });
+
+        // xử lý sự kiện
+        $('#form-add-event').submit((e) => {
+            // e.preventDefault();
+            let form = e.target;
+            CALENDAR.evoCalendar('addCalendarEvent', {
+                id: (gid++).toString(),
+                name: form['ten-su-kien'].value,
+                description: form['mo-ta-su-kien'].value,
+                date: new Date(CALENDAR.evoCalendar('getActiveDate')),
+                badge: form['loai-su-kien'].value,
+                type: 'event',
+                color: '#63d867',
+            });
+        });
+
+        $('#form-rm-event').submit((e) => {
+            e.preventDefault();
+            let form = e.target;
+            form.querySelectorAll('input[type="checkbox"]:checked').forEach((inp) => {
+                CALENDAR.evoCalendar('removeCalendarEvent', inp.value);
+            });
+        });
+
+        $('#btn-rm-event').click((e) => {
+            let listEv = CALENDAR.evoCalendar('getActiveEvents');
+            $('#form-rm-list-event').html(
+                listEv
+                    .map(
+                        (ev) => `
+                            <div class="input-group mb-3">
+                                <div class="input-group-text">
+                                    <input
+                                        class="form-check-input mt-0"
+                                        type="checkbox"
+                                        value=${ev.id}
+                                        aria-label="Checkbox for following text input"
+                                    />
+                                </div>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    aria-label="Text input with checkbox"
+                                    value=${ev.name}
+                                    disabled
+                                />
+                            </div>`,
+                    )
+                    .join(''),
+            );
+        });
+
+        CALENDAR.on('selectDate', (_, newDate, __) => {
+            $('#btn-rm-event').prop('disabled', CALENDAR.evoCalendar('getActiveEvents').length == 0);
+        });
+
+        $('#btn-voice-start').click((e) => {
+            $('#voice-inp').text('Đang lắng nghe...');
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'vi-VN';
+            recognition.onresult = function (event) {
+                $('#voice-inp').text(event.results[0][0].transcript);
+            };
+            recognition.start();
+        });
+        $('#btn-voice-stop').click((e) => {
+            $('#voice-inp').text('Đang xử lý...');
+            recognition.stop();
+        });
+    });
+</script>
+{% endblock %}

@@ -1,9 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark justify-content-between">
     <a class="navbar-brand" href="{{url_for('home')}}">
-        <img src="../static/image/wibu.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        Wibu Team</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="../static/image/wibu.png" width="30" height="30" class="d-inline-block align-top" alt="" />
+        Wibu Team
+    </a>
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -16,27 +24,26 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{url_for('home')}}">
                     {%if current_user.avatar %}
-                    <img class="rounded-circle" src="{{current_user.avatar}}" width="30" height="30px">
+                    <img class="rounded-circle" src="{{current_user.avatar}}" width="30" height="30px" />
                     {%else%}
-                    <img class="rounded-circle" src="{{url_for('static', filename='image/wibu.png')}}" width="30">
-                    {%endif%}
-                    {{current_user.username}}
+                    <img class="rounded-circle" src="{{url_for('static', filename='image/wibu.png')}}" width="30" />
+                    {%endif%} {{current_user.username}}
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{url_for('user_signout')}}">Dăng xuất</a>
+                <a class="nav-link" href="{{url_for('user_signout')}}">Đăng xuất</a>
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="{{url_for('chat_room')}}">Chat room <span class="sr-only"></span></a>
+                <a class="nav-link" href="{{url_for('chat_room')}}">Chat room<span class="sr-only"></span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{url_for('taichinh')}}">Tai Chinh <span class="sr-only"></span></a>
+                <a class="nav-link" href="{{url_for('taichinh')}}">Tài Chính<span class="sr-only"></span></a>
             </li>
             {%else%}
             <li class="nav-item">
-                <a class="nav-link" href="{{url_for('user_signin')}}">Dăng nhập</a>
+                <a class="nav-link" href="{{url_for('user_signin')}}">Đăng nhập</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{url_for('user_register')}}">Đăng ký</a>
