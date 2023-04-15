@@ -3,13 +3,13 @@ body{
 }
 .container{
     margin-top:2%;
-    background: #f9f9f9;
+    margin-bottom: 130px !important;
     border-radius:30px;
-    padding:40px
+    padding:40px !important;
 }
 .mb-3{
     display:flex;
-
+    align-items: center;
 }
 .mb-3 label{
     width: 15%;

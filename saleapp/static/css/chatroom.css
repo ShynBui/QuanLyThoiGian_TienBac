@@ -12,7 +12,7 @@ border: 1px solid #fff0f0;
 
     height:10%;
     width: 100%;
-    background: #3C91E6;
+
     border-color: #cfcfcf;
 
     align-items: center;
@@ -23,7 +23,7 @@ border: 1px solid #fff0f0;
 
 
 overflow-y:scroll;
- height:82% !important;
+ height:80% !important;
 padding:10px;
 
  border-color: #cfcfcf;

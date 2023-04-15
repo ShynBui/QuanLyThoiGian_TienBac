@@ -7,6 +7,7 @@ import cloudinary.uploader
 from flask_socketio import SocketIO, emit, join_room
 import requests
 import openpyxl
+from saleapp.decoding import decoding_no1
 from datetime import datetime, date
 
 @app.route("/")
@@ -27,7 +28,7 @@ def chat_room():
 
     # print(room.room_id)
 
-    user_send = [(untils.get_user_by_id(x.user_id).name) for x in list_user]
+    user_send = [decoding_no1(untils.get_user_by_id(x.user_id).name) for x in list_user]
 
     user_image = [untils.get_user_by_id(x.user_id).avatar for x in list_user]
 
@@ -45,7 +46,7 @@ def chat_room():
 
         # print(untils.load_message(room.room_id)[0].content)
 
-        return render_template('chatroom.html', user_name=(user_name), room=room.room_id, name=current_user.name,
+        return render_template('chatroom.html', user_name=decoding_no1(user_name), room=room.room_id, name=current_user.name,
                                message=list_user, room_id=int(room.room_id),
                                user_send=user_send, n=len(user_send), user_image=user_image, user_id=user_id,
                                room_name=untils.get_chatroom_by_id(room.room_id),
@@ -58,11 +59,11 @@ def chat_room():
 def chat_room_admin(room_id):
     if current_user.userRole == UserRole.SYSADMIN or current_user.userRole == UserRole.ADMIN:
         # print(room_id)
-        user_name = current_user.name
+        user_name = decoding_no1(current_user.name)
         room = untils.get_chatroom_by_room_id(id=room_id)
         list_user = untils.load_message(room.room_id)
 
-        user_send = [(untils.get_user_by_id(x.user_id).name) for x in list_user]
+        user_send = [decoding_no1(untils.get_user_by_id(x.user_id).name) for x in list_user]
 
         user_image = [untils.get_user_by_id(x.user_id).avatar for x in list_user]
 
@@ -75,7 +76,7 @@ def chat_room_admin(room_id):
         host_avatar = untils.get_host_room_avatar(room.room_id);
 
         if user_name and room:
-            return render_template('chatroom.html', user_name=user_name, room=room.room_id, name=current_user.name,
+            return render_template('chatroom.html', user_name=(user_name), room=room.room_id, name=current_user.name,
                                    message=list_user, room_id=int(room.room_id),
                                    user_send=user_send, n=len(user_send), user_image=user_image, user_id=user_id,
                                    room_name=untils.get_chatroom_by_id(room.room_id),
@@ -399,7 +400,8 @@ def chitieuhangthang():
 def profile_user():
 
     profile = untils.get_user_by_id(current_user.id)
-
+    profile.name = decoding_no1(profile.name)
+    profile.email = decoding_no1(profile.email)
     hoten = profile.name.split(" ")
 
     ho = hoten[0]

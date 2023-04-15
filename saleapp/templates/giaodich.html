@@ -11,21 +11,22 @@
 {% block content %}
 
 
-<div class="container">
+<div class="container" style="    background: #f9f9f9;">
 
-    <h1>Thêm giao dịch</h1>
+    <h1 style="    display: flex;
+    justify-content: center; margin-bottom:30px">Thêm giao dịch</h1>
     <div>
     <form id="myForm" method="post" action="/giaodich">
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Số tiền</label>
-            <input id="tien" min="0" value="{{sotien}}" name="sotien" type="number" class="form-control"> đ
-        </div>
+            <label for="exampleFormControlInput1" class="form-label"> <i class='bx bx-dollar'></i>Số tiền</label>
+
+            <input id="tien" min="0" value="{{sotien}}" name="sotien" type="number" class="form-control">       </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Tên giao dịch</label>
+            <label for="exampleFormControlInput1" class="form-label"><i class='bx bxl-paypal' ></i>Tên giao dịch</label>
             <input value="{{name}}" name="name" type="text" class="form-control">
         </div>
         <div class="mb-3">
-            <label class="form-label">Chọn nhóm</label>
+            <label class="form-label"><i class='bx bxs-group' ></i>Chọn nhóm</label>
             <select name="nhom" id="myDropdown" class="form-select" aria-label="Default select example">
                 {%for i in all_nhom%}
                 {%if nhomselect == i.id%}
@@ -37,7 +38,7 @@
             </select>
         </div>
         <div class="mb-3">
-            <label class="form-label">Chọn Loại</label>
+            <label class="form-label"><i class='bx bxs-wallet-alt' ></i>Chọn Loại</label>
             <select name="loai" class="form-select" aria-label="Default select example">
                 {%for i in all_loai%}
                 {%if loai == i.id%}
@@ -49,11 +50,11 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Ghi chú</label>
+            <label for="exampleFormControlTextarea1" class="form-label"><i class='bx bxs-note' ></i>Ghi chú</label>
             <textarea name="note" class="form-control" id="exampleFormControlTextarea1" rows="3">{{note}}</textarea>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Hôm nay</label>
+            <label for="exampleFormControlInput1" class="form-label"><i class='bx bxs-calendar' ></i>Thời gian</label>
             <input value="{{date}}" id="myDate" name="ngay" type="date" class="form-control" id="exampleFormControlInput1">
         </div>
         <button class="btn btn-primary" type="submit">
