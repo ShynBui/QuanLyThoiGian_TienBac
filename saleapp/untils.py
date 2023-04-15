@@ -6,6 +6,7 @@ import json
 from datetime import datetime, timedelta
 import hashlib
 from sqlalchemy.sql import extract
+from saleapp.encoding import encoding_no1
 
 
 
@@ -35,7 +36,8 @@ def add_user(name, username, password, diachi, queQuan, **kwargs):
     # print(queQuan)
     user = User(name=name.strip(), username=username, password=password, email=kwargs.get('email'),diachi=diachi, queQuan=queQuan,
                  dob=kwargs.get('dob'), sdt=kwargs.get('phone'), idtaikhoan = taiKhoan.id)
-
+    user.name = encoding_no1(user.name)
+    user.email = encoding_no1(user.email)
     db.session.add_all([user])
 
     db.session.commit()
@@ -122,10 +124,12 @@ def check_admin_login(username, password):
 
 
 def get_unreply_room():
-    room = Room.query.filter(Room.is_reply.__eq__(False)) \
-        .order_by(Room.date.desc())
+    # room = Room.query.filter(Room.is_reply.__eq__(False)) \
+    #     .order_by(Room.date.desc())
 
-    return room.all()
+    room = Room.query.all()
+
+    return room
 
 
 def get_user_by_id(user_id):
@@ -393,3 +397,15 @@ def get_all_loai():
 
     return loai
 
+def change_info(user_id, sdt, diachi):
+    user = get_user_by_id(user_id)
+
+    user.sdt = sdt
+    user.diachi = diachi
+
+    db.session.commit()
+
+    return 1;
+
+# def summary(text):
+#     return summarizer(text, max_length=200, min_length=20, do_sample=False)[0]['summary_text']

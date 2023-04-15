@@ -422,11 +422,18 @@ def chitieuhangthang():
 
 @app.route("/profile", methods=['post', 'get'])
 def profile_user():
-
+    # sdt = request.form.get('sdt')
+    # email = request.form.get('email')
+    # diachi = request.form.get('diachi')
+    #
     profile = untils.get_user_by_id(current_user.id)
     profile.name = decoding_no1(profile.name)
     profile.email = decoding_no1(profile.email)
     hoten = profile.name.split(" ")
+    #
+    # if sdt:
+    #     untils.change_info(user_id=current_user.id, sdt=sdt, diachi=diachi)
+    #     return render_template('profile.html', user=user)
 
     ho = hoten[0]
     ten = ''
@@ -437,7 +444,20 @@ def profile_user():
 
     return render_template('profile.html', profile=profile, ten=ten[1:], ho=ho, taikhoan=taikhoan)
 
+@app.route('/summary', methods=['post', 'get'])
+def summary():
+    summary = ''
+    text = ''
 
+    if request.method == 'POST':
+        text = request.form.get('text')
+
+        if text:
+            summary = untils.summary(text)
+        else:
+            summary = "Please input fully"
+
+    return render_template('summary.html', summary=summary, text=text)
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)

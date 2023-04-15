@@ -32,7 +32,6 @@ class ChatAdmin(BaseView):
         room = untils.get_unreply_room()
         user = untils.get_user_by_id(current_user.id)
         user.name = decoding_no1(user.name)
-        # print(room)
 
         return self.render('admin/chat_admin.html', room=room, user=user)
 
@@ -71,10 +70,9 @@ class ViewUserDetail(BaseView):
             (current_user.userRole == UserRole.ADMIN or current_user.userRole == UserRole.SYSADMIN)
 
 
-admin = Admin(app=app, name='QUẢN TRỊ MÁY BAY', template_mode='bootstrap4',
+admin = Admin(app=app, name='QUẢN TRỊ', template_mode='bootstrap4',
               index_view=MyAdminIndex())
 
 admin.add_view(ChatAdmin(name='ChatAdmin'))
-admin.add_view(ViewUserDetail(name='User Detail'))
-admin.add_view(Stat(name='Thống kê'))
+# admin.add_view(Stat(name='Thống kê'))
 admin.add_view(LogoutView(name='Logout'))

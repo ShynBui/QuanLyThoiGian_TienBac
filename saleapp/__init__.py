@@ -24,3 +24,5 @@ cloudinary.config(
 db = SQLAlchemy(app=app)
 login = LoginManager(app=app)
 socketio = SocketIO(app)
+# hub_model_id = "huggingface-course/mt5-small-finetuned-amazon-en-es"
+# summarizer = pipeline("summarization", model=hub_model_id)
