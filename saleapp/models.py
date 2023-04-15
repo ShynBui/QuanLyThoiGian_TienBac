@@ -82,8 +82,8 @@ class Priority(db.Model):
 class Loai(db.Model):
     __abstract__ = True
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(255), nullable=False)
-    description = Column(Text, nullable=False)
+    name = Column(String(255))
+    description = Column(Text)
 
     def __str__(self):
         return self.name
@@ -95,7 +95,6 @@ class Event(Loai):
     noiToChuc = Column(String(255), nullable=False)
     host = Column(Integer, nullable=False)
     userevent = relationship('UserEvent', backref='event', lazy=True)
-    task = relationship('Task', backref='event', lazy=True)
 
     def __str__(self):
         return self.host
@@ -105,6 +104,7 @@ class LoiNhac(Loai):
 
     isLoop = Column(Boolean, default=True)
     hour = Column(Integer, nullable=False)
+    task = relationship('Task', backref='loinhac', lazy=True)
 
     def __str__(self):
         return self.id
@@ -128,8 +128,8 @@ class Task(db.Model):
     deadline = Column(DateTime, nullable=False)
     finish = Column(Boolean, default=False)
     idPriority = Column(Integer, ForeignKey(Priority.id), nullable=False, primary_key=True)
-    idEvent = Column(Integer, ForeignKey(Event.id), nullable=False, primary_key=True)
     idUser = Column(Integer, ForeignKey(User.id), nullable=False, primary_key=True)
+    idLoiNhac = Column(Integer, ForeignKey(LoiNhac.id), nullable=False, primary_key=True)
 
     def __str__(self):
         return self.name
@@ -317,5 +317,14 @@ if __name__ == '__main__':
         db.session.add_all([message2])
         db.session.commit()
 
+
+        #priority
+
+        pri1 = Priority(name="Hard", mucDo=1)
+        pri2 = Priority(name="Normal", mucDo=2)
+        pri3 = Priority(name="Easy", mucDo=3)
+
+        db.session.add_all([pri1, pri2, pri3])
+        db.session.commit()
 
         db.session.commit()

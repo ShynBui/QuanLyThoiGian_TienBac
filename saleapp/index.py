@@ -9,6 +9,7 @@ import requests
 import openpyxl
 from saleapp.decoding import decoding_no1
 from datetime import datetime, date
+from saleapp.time import *
 
 import feedparser
 
@@ -477,6 +478,48 @@ def summary():
 def getRSS():
     feed = feedparser.parse('https://mof.gov.vn/webcenter/rss?muchienthiId=1908')
     return render_template('tintuc.html', article=feed['entries'])
+
+
+@app.route('/calendar', methods=['GET'])
+def calendar():
+    loinhac = get_su_kien(current_user.id)
+
+    data = []
+
+    for i in loinhac:
+        data.append({
+            "id": i.id,
+            "name": i.name,
+            "description": i.description,
+            "badge": "Sự kiện",
+            "date": i.startAt,
+            "type": 'event',
+        })
+
+    return render_template('calendar.html', data=data)
+
+
+@app.route('/create_task', methods=['Post', 'get'])
+def create_task():
+    name = request.form.get('name')
+    task = request.form.get('task')
+    deadline = request.form.get('deadline')
+    startAt = request.form.get('startAt')
+    des = request.form.get('des')
+    loop = request.form.get('loop')
+
+    hour_dl = deadline.split(':')[0]
+    minute_dl = deadline.split(':')[1]
+
+    hour_sa = startAt.split(':')[0]
+    minute_sa = startAt.split(':')[1]
+
+    deadline = datetime.now().replace(hour=int(hour_dl), minute=int(minute_dl), second=0, microsecond=0)
+    startAt = datetime.now().replace(hour=int(hour_sa), minute=int(minute_sa), second=0, microsecond=0)
+
+    add_task(user_id=current_user.id, name=name, task=task, deadline=deadline, startAt=startAt, des=des, loop=loop)
+
+    return redirect(url_for('calendar'))
 
 
 if __name__ == '__main__':
