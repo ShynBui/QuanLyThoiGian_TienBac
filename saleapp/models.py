@@ -5,7 +5,7 @@ from datetime import datetime
 from enum import Enum as UserEnum
 from flask_login import UserMixin
 import hashlib
-from saleapp.encoding import  encoding_no1
+from saleapp.encoding import encoding_no1
 from saleapp.decoding import decoding_no1
 class BaseModel(db.Model):
     __abstract__ = True
@@ -193,9 +193,8 @@ class TaiKhoanChiTieu(db.Model):
 
 
 if __name__ == '__main__':
+
     with app.app_context():
-
-
         db.drop_all()
         db.create_all()
         db.session.commit()
@@ -295,7 +294,7 @@ if __name__ == '__main__':
 
         # user
         # tk: u2
-# mk: 1
+        # mk: 1
         room2 = Room(name='ccv', is_reply=False, date=datetime.now())
         db.session.add_all([room2])
         db.session.commit()

@@ -377,8 +377,7 @@ def giaodich():
 
     return render_template('giaodich.html', all_nhom=all_nhom, all_loai=all_loai, nhomselect=int(nhom),
                            sotien=sotien, ngay=datetime.now(), loai=int(0), note='',
-                           date=datetime.strptime('2023-04-14', '%Y-%m-%d').date(), name=name)
-
+                           date=datetime.strptime('2023-04-15', '%Y-%m-%d').date(), name=name)
 
 
 @app.route('/chitieuhangthang', methods=['post', 'get'])
@@ -392,9 +391,31 @@ def chitieuhangthang():
     for i in tennhom:
         chitieu.append(untils.get_all_loai_theo_nhom(i.id))
 
-    # print(chitieu)
+    tien = []
+    subN = []
+    phepChia = []
+    counting = 0
+    tongTien = 0
+    for i in chitieu:
+        temp = []
+        counting = 0
+        for j in i:
+            temp.append(untils.get_tong_tien_theo_id_loai(j.id))
+            counting = counting + 1
+            tongTien = tongTien + untils.get_tong_tien_theo_id_loai(j.id)
+        tien.append(temp)
+        subN = counting
 
-    return render_template('chitieuhangthang.html', chitieu=chitieu, tennhom=tennhom, n=len(tennhom))
+    for i in chitieu:
+        temp = []
+        for j in i:
+            temp.append(round(untils.get_tong_tien_theo_id_loai(j.id) / tongTien, 2) * 100)
+        phepChia.append(temp)
+
+    # print(tien)
+
+    return render_template('chitieuhangthang.html', chitieu=chitieu, tennhom=tennhom, n=len(tennhom), tien=tien,
+                           subN=subN, tongTien=tongTien, phepChia=phepChia)
 
 @app.route("/profile", methods=['post', 'get'])
 def profile_user():
