@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark justify-content-between">
     <a class="navbar-brand" href="{{url_for('home')}}">
         <img src="../static/image/wibu.png" width="30" height="30" class="d-inline-block align-top" alt="" />
@@ -19,11 +20,35 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{url_for('home')}}">Trang chủ <span class="sr-only"></span></a>
             </li>
+=======
+ {% block css %}
+    <link href="{{ url_for('static', filename='css/trangchu.css') }}"
+          rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+ {%endblock%}
+<header>
+>>>>>>> refs/remotes/origin/main
 
-            {%if current_user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{url_for('home')}}">
+        <nav class="navbar">
+          <!-- logo -->
+
+          <!-- links -->
+          <ul class="navbar__links">
+              {%if current_user.is_authenticated %}
+
+            <li class="navbar__link"><a href="{{url_for('home')}}">Trang chủ</a></li>
+            <li class="navbar__link"><a href="{{url_for('taichinh')}}">Quản lý tài chính</a></li>
+            <li class="navbar__link"><a href="#">Sắp xếp thời gian biểu</a></li>
+            <li class="navbar__link"><a href="{{url_for('chat_room')}}">Hỗ trợ trực tuyến</a></li>
+            <li class="navbar__link">
+                <a class="" href="{{url_for('profile_user')}}">
                     {%if current_user.avatar %}
+<<<<<<< HEAD
                     <img class="rounded-circle" src="{{current_user.avatar}}" width="30" height="30px" />
                     {%else%}
                     <img class="rounded-circle" src="{{url_for('static', filename='image/wibu.png')}}" width="30" />
@@ -52,3 +77,32 @@
         </ul>
     </div>
 </nav>
+=======
+                    <img class="rounded-circle" src="{{current_user.avatar}}" width="40px" style="border-radius:50%" height="40px">
+                    {%else%}
+                    <img class="rounded-circle" src="{{url_for('static', filename='image/wibu.png')}}" width="40">
+                    {%endif%}
+
+                </a>
+            </li>
+              <li class="navbar__link">
+                <a class="nav-link" href="{{url_for('user_signout')}}">Đăng xuất</a>
+            </li>
+             {%else%}
+               <a href="{{url_for('user_signin')}}"><button style="background:#27946f" class="navbar__btn">Đăng nhập</button></a>
+            <li class="navbar__link">
+                <a  href="{{url_for('user_register')}}"><button class="navbar__btn">Đăng ký</button></a>
+            </li>
+            {%endif%}
+
+          </ul>
+          <!-- menu button -->
+          <div class="navbar__icons">
+            <div class="navbar__icon"></div>
+          </div>
+        </nav>
+
+    </header>
+
+
+>>>>>>> refs/remotes/origin/main

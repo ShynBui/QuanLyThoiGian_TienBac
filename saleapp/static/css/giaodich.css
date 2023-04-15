@@ -1,3 +1,16 @@
 body{
-    background:#e7e9eb;
+    background:#eeeeee;
+}
+.container{
+    margin-top:2%;
+    margin-bottom: 130px !important;
+    border-radius:30px;
+    padding:40px !important;
+}
+.mb-3{
+    display:flex;
+    align-items: center;
+}
+.mb-3 label{
+    width: 15%;
 }

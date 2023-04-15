@@ -1,10 +1,165 @@
 {% extends 'layout/base.html' %}
 
 {% block title %} Trang chu {% endblock %}
-
+{% block css %}
+<link href="{{ url_for('static', filename='css/trangchu.css') }}"
+      rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap"
+      rel="stylesheet"/>
+{%endblock%}
 
 {% block content %}
+ <section id="overlay"></section>
+    <!-- header -->
+<!--    <header>-->
+<!--      <div class="container">-->
+<!--        <nav class="navbar">-->
+<!--          &lt;!&ndash; logo &ndash;&gt;-->
+<!--          <div class="navbar__logo">-->
+<!--            <img src="{{ url_for('static', filename='image/logo.svg') }}" alt="website logo" />-->
+<!--          </div>-->
+<!--          &lt;!&ndash; links &ndash;&gt;-->
+<!--          <ul class="navbar__links">-->
+<!--            <li class="navbar__link"><a href="#works">Quản lý tài chính</a></li>-->
+<!--            <li class="navbar__link"><a href="#things">Sắp xếp thời gian biểu</a></li>-->
+<!--            <li class="navbar__link"><a href="#works">Hỗ trợ trực tuyến</a></li>-->
+<!--            <a href="#footer"><button class="navbar__btn">Đăng nhập</button></a>-->
+<!--          </ul>-->
+<!--          &lt;!&ndash; menu button &ndash;&gt;-->
+<!--          <div class="navbar__icons">-->
+<!--            <div class="navbar__icon"></div>-->
+<!--          </div>-->
+<!--        </nav>-->
+<!--      </div>-->
+<!--    </header>-->
+    <!-- banner -->
+    <section id="banner">
+      <div class="container">
+        <!-- img -->
+        <div class="banner__img">
+          <img src="{{ url_for('static', filename='image/banner-img.png') }}" alt="illustration of women" />
+        </div>
+        <!-- heading -->
+        <div class="banner__heading">
+          <h1>Code Heroes <span style="color:red; font-weight:600"> FINANCE </span></h1>
+          <p>
+            Code Hero là trang ứng dụng tài chính tiện lợi, giúp bạn quản lý tài chính cá nhân và đầu tư thông minh. Với giao diện đơn giản, bạn có thể theo dõi chi tiêu, lập kế hoạch và đọc thông tin tài chính nóng hổi. Hãy truy cập Code Hero để tối ưu hóa quản lý tài chính của bạn!
+          </p>
+          <a href="#"><button class="banner__btn">Tìm hiểu thêm</button></a>
+          <div class="banner__socials">
+            <a href="#"><i class="fab fa-dribbble"></i></a>
+            <a href="#"><i class="fab fa-behance"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- things -->
+    <section id="things">
+      <div class="container">
+        <!-- dec -->
+        <div class="things__dec">
+          <img src="{{ url_for('static', filename='image/things-dec-l.png') }}" alt="illustration of leaf" />
+        </div>
+        <!-- dec -->
+        <div class="things__dec">
+          <img src="{{ url_for('static', filename='image/things-dec-r.png') }}" alt="illustration of leaf" />
+        </div>
+        <!-- heading -->
+        <h2>Những gì chúng tôi làm</h2>
+        <!-- item 1 -->
+        <div class="things__item">
+          <!-- img -->
+          <img src="{{ url_for('static', filename='image/things-item-1.png') }}" alt="illustration of women" />
+          <!-- text -->
+          <div class="things__item--heading">
+            <h3>Quản lý tài chính cá nhân</h3>
+            <p>
+              Giúp bạn có một chiến lược quản lý tài chính cá nhân hiệu quả, đưa ra những gợi ý về kinh tế, sắp xếp các khoản chi tiêu một cách hợp lý
+            </p>
+          </div>
+        </div>
+        <!-- item 2 -->
+        <div class="things__item">
+          <!-- img -->
+          <img src="{{ url_for('static', filename='image/things-item-2.png') }}" alt="illustration of women" />
+          <!-- text -->
+          <div class="things__item--heading">
+            <h3>Lên lịch</h3>
+            <p>
+              Giúp bạn thiết kế 1 thời gian biểu phù hợp với bản thân, lập lịch để có thể đưa ra một chiến lược kinh tế hiệu quả
+            </p>
+          </div>
+        </div>
+        <!-- item 3 -->
+        <div class="things__item">
+          <!-- img -->
+          <img src="{{ url_for('static', filename='image/things-item-3.png') }}" alt="illustration of computer" />
+          <!-- text -->
+          <div class="things__item--heading">
+            <h3>Hỗ trợ trực tuyến</h3>
+            <p>
+              Hỗ trợ trực tuyến nếu bạn gặp bất kì vấn đề gì trong quá trình sử dụng, đem lại cho bạn một trải nghiệm người dùng tốt nhất
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- works -->
+    <section id="works">
+      <div class="container">
+        <!-- dec -->
+        <div class="works__dec">
+          <img src="{{ url_for('static', filename='image/work-dec.png') }}" alt="illustration of leaf" />
+        </div>
+        <div class="works__dec">
+          <img src="{{ url_for('static', filename='image/work-dec.png') }}" alt="illustration of leaf" />
+        </div>
+        <!-- heading -->
+        <h2>Recent Works</h2>
+        <!-- img -->
+        <div class="works__img">
+          <div class="works__img--single">
+            <img src="https://nganhangviet.org/wp-content/uploads/2020/06/quan-ly-tai-chinh-ca-nhan.jpg" alt="bag" />
+          </div>
+          <div class="works__img--single">
+            <img src="https://veo.com.vn/wp-content/uploads/2021/01/time-01.jpg" alt="">
+          </div>
+          <div class="works__img--single">
+            <img src="https://vchat.vn/themes/v1/images/bot.png" alt="women" />
+          </div>
+          <div class="works__img--single">
+            <img src="https://images.careerbuilder.vn/content/images/len-lich-lam-viec-careerbuilder(1).jpg" alt="piggy bank" />
+          </div>
+        </div>
+        <!-- btn -->
+        <div class="works__btn" style="margin-bottom:30px">
+          <a href="#"><button>Contact</button></a>
+        </div>
+      </div>
+    </section>
+    <!-- footer -->
 
+    <!-- fontawesome -->
+<script>
+  // Menu
+const menu = document.querySelector(".navbar__links");
+const menuButton = document.querySelector(".navbar__icons");
+const overlay = document.querySelector("#overlay");
+
+menuButton.addEventListener('click', () => {
+  menu.classList.toggle("navbar__open");
+  menuButton.classList.toggle("open");
+  overlay.classList.toggle("show");
+});
+
+overlay.addEventListener('click', () => {
+  menu.classList.toggle("navbar__open");
+  menuButton.classList.toggle("open");
+  overlay.classList.toggle("show");
+});
+</script>
 {% endblock %}
-
-

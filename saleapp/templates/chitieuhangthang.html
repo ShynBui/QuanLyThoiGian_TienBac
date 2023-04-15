@@ -1,0 +1,130 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Chat room {% endblock %}
+{% block css %}
+<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/taiChinh.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chitieuhangthang.css') }}">
+{%endblock%}
+
+
+{% block content %}
+
+<!-- CONTENT -->
+<section id="content">
+    <!-- NAVBAR -->
+
+    <!-- NAVBAR -->
+
+    <!-- MAIN -->
+    <main>
+
+
+        <div class="table-data">
+            <div class="order" style="position: relative">
+                <div class="head">
+                    <h3>Chi tiêu hàng tháng</h3>
+                    <i class='bx bx-search'></i>
+                    <i class='bx bx-filter'></i>
+                </div>
+                <form method="post" action="" style="width:100%" class="">
+                    {%for i in range(n)%}
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>{{tennhom[i]}}</th>
+                            <th>
+                                Tiến độ
+                            </th>
+                            <th>
+                                Đã dùng
+                            </th>
+                            <th>Tỉ lệ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {%for j in range(subN)%}
+                        <tr>
+                            <td>
+                                <img src="{{chitieu[i][j].image}}">
+                                <p>{{chitieu[i][j].name}}</p>
+                            </td>
+                            <td>
+                                <progress value="{{tien[i][j]}}" max="{{tongTien}}">{{tien[i][j]}} / {{tongTien}}</progress>
+                            </td>
+                            <td>
+                                <input style="margin-left:40px" min="0" value="{{tien[i][j]}}" name="" type="number"
+                                       class="form-control status completed">
+                            </td>
+                            <td>
+                                <span>{{phepChia[i][j]}}%</span>
+                            </td>
+                        </tr>
+                        {%endfor%}
+                        <br>
+                        </tbody>
+                    </table>
+                    {%endfor%}
+                    <div class="control">
+                        <div class="edit_control">
+                            Edit
+                            <i class='bx bxs-save'></i>
+                        </div>
+                        <div class="submit_control">
+                            <button class="btn btn-success" type="submit">
+                                Save
+                                <i class='bx bxs-save'></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="todo">
+                <div class="head">
+                    <h3>Kế hoạch cắt giảm chi tiêu</h3>
+                    <i class='bx bx-plus'></i>
+                    <i class='bx bx-filter'></i>
+                </div>
+                <ul class="todo-list">
+                    <li class="completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="not-completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="not-completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <!-- MAIN -->
+</section>
+<!-- CONTENT -->
+<script>
+
+    const control = document.querySelector(".edit_control");
+const submitControl = document.querySelector(".submit_control");
+
+control.addEventListener("click", function() {
+  submitControl.style.display = "inline-block";
+});
+
+
+
+</script>
+<script src="{{ url_for('static', filename='js/taiChinh.js') }}"></script>
+
+{%endblock%}

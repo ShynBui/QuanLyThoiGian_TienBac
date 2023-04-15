@@ -19,23 +19,26 @@
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Tài chính cá nhân</h1>
+                <h1>Dashboard</h1>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="#">Tài chính cá nhân</a>
+                        <a href="#">Dashboard</a>
                     </li>
                     <li><i class='bx bx-chevron-right'></i></li>
                     <li>
-                        <a class="active" href="#">Tài chính</a>
+                        <a class="active" href="#">Home</a>
                     </li>
                 </ul>
             </div>
-            <div class="sub_head">
-                <a href="{{url_for('chitieuhangthang')}}" class="btn-download btn-dow1"
-                   style="background:#e1c980; color:black">
+<<<<<<< HEAD
+             <div class="sub_head">
+                 <a href="{{url_for('chitieuhangthang')}}" class="btn-download btn-dow1" style="background:#e1c980; color:black">
                     <i class='bx bxs-report'></i>
                     <span class="text">Thêm chi tiêu hàng tháng</span>
                 </a>
+=======
+            <div class="sub_head">
+>>>>>>> 43d6f24bc44be3b00db25f40fae1afae889b188a
                 <a href="{{url_for('giaodich')}}" class="btn-download btn-dow1" style="background:#e1c980; color:black">
                     <i class='bx bxs-report'></i>
                     <span class="text">Thêm giao dịch</span>
@@ -53,20 +56,14 @@
                 <span class="text">
 						<h3>1020</h3>
 						<p>New Order</p>
-                </span>
+					</span>
             </li>
             <li>
                 <i class='bx bxs-group'></i>
                 <span class="text">
-                    <h3 style="font-size:20px">Thêm tiền mặt</h3>
-                     <form method="post" action="/process_addtien" style="width:100%; display:flex;height: 40px;">
-                         <input min="0" value="0" name="themtien" type="number"
-                                class="form-control status completed" style="width:70%"/>
-                        <div class="sub_col" style="width:10%">
-                            <button type="submit" class="btn"><i class='bx bx-plus-circle' style="height:0px"></i></button>
-                        </div>
-                    </form>
-                </span>
+						<h3>Ví của tôi</h3>
+						<p>Tiền mặt: {{sotien}} đ </p>
+					</span>
             </li>
             <li>
                 <i class='bx bxs-dollar-circle'></i>
@@ -122,6 +119,17 @@
                         </div>
                     </li>
                     {%endfor%}
+
+<!--                    <li class="completed">-->
+<!--                        <p>Mua sắm</p>-->
+<!--                        <div class="sub_completed">-->
+<!--                            <p class="sub1">Số tiền</p>-->
+<!--                            <p class="sub2">500.000</p>-->
+<!--                        </div>-->
+
+
+<!--                    </li>-->
+
                 </ul>
             </div>
         </div>
@@ -141,32 +149,76 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {%for i in range(n2)%}
                     <tr>
                         <td>
                             <img src="img/people.png">
-                            <p>{{ten2[i]}}</p>
+                            <p>Ăn uống</p>
                         </td>
-                        <td>{{time2[i]}}</td>
-                        <td><span class="status completed">{{tien2[i]}}</span></td>
+                        <td>01-10-2021</td>
+                        <td><span class="status completed">500.000</span></td>
                     </tr>
-                    {%endfor%}
+                    <tr>
+                        <td>
+                            <img src="img/people.png">
+                            <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="img/people.png">
+                            <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status process">Process</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="img/people.png">
+                            <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="img/people.png">
+                            <p>John Doe</p>
+                        </td>
+                        <td>01-10-2021</td>
+                        <td><span class="status completed">Completed</span></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
             <div class="todo">
                 <div class="head">
-                    <h3>Chi tiêu trong ngày</h3>
+                    <h3>Kế hoạch cắt giảm chi tiêu</h3>
                     <i class='bx bx-plus'></i>
                     <i class='bx bx-filter'></i>
                 </div>
                 <ul class="todo-list">
-                    {%for i in range(n3)%}
                     <li class="completed">
-                        <p>{{ten3[i]}}</p>
-                        <i class='bx bx-dots-vertical-rounded'><p>{{tien3[i]}}</p></i>
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
                     </li>
-                    {%endfor%}
+                    <li class="completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="not-completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
+                    <li class="not-completed">
+                        <p>Todo List</p>
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -176,7 +228,60 @@
 <!-- CONTENT -->
 
 <script src="{{ url_for('static', filename='js/taiChinh.js') }}"></script>
+<h1>{{sotien}} đ </h1>
+<h5>Tổng số dư</h5>
 
+<div>
+    <span>Ví của tôi</span>
+    <a href="#">Xem tất cả</a>
+
+    <div>
+        <img src="https://png.pngtree.com/element_our/20190528/ourmid/pngtree-orange-wallet-icon-image_1168655.jpg"
+             style="border-radius: 50%; width: 50px">
+        <span>Tiền mặt</span>
+        <span>{{sotien}} đ</span>
+    </div>
+
+    <div>
+        <div>
+            <span> Báo cáo chi tiêu </span>
+            <a href="#">Xem báo cáo</a>
+        </div>
+
+        <div>
+            <form>
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Tuần</button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-secondary">Tháng</button>
+                    </div>
+                </div>
+            </form>
+
+            <div>
+                Số tiền đã chi - dòng này để tiền vào
+                <div>Tổng chi tuần/tháng này</div>
+            </div>
+
+            <!--            <div id="Mychart">Để biểu đồ vô đây</div>-->
+
+            <div>Chi tiêu nhiều nhất (List các loại chi tiêu)</div>
+
+            <div>
+                <img src="/static/image/codeheroes.png" style="height: 300px">
+            </div>
+
+            <div>
+                Giao dịch gần đây - top 3 giao dịch
+            </div>
+        </div>
+
+    </div>
+
+    <a href="{{url_for('giaodich')}}">Thêm giao dịch</a>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -223,10 +328,6 @@
       }
     }
   });
-
-
-
-
 
 
 </script>

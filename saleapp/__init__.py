@@ -11,7 +11,11 @@ from joblib import dump, load
 app = Flask(__name__)
 
 app.secret_key = '689567gh$^^&*#%^&*^&%^*DFGH^&*&*^*'
+<<<<<<< HEAD
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/quanlythoigian?charset=utf8mb4'
+=======
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@localhost/quanlythoigian?charset=utf8mb4'
+>>>>>>> refs/remotes/origin/main
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 
@@ -24,3 +28,5 @@ cloudinary.config(
 db = SQLAlchemy(app=app)
 login = LoginManager(app=app)
 socketio = SocketIO(app)
+# hub_model_id = "huggingface-course/mt5-small-finetuned-amazon-en-es"
+# summarizer = pipeline("summarization", model=hub_model_id)

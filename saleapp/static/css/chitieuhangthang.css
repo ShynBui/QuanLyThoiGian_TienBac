@@ -1,0 +1,47 @@
+.control{
+    display:flex;
+    width: 90%;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 20px;
+}
+
+.order{
+    position: relative !important!;
+}
+.form-control{
+    width:50%;
+}
+.submit_control{
+    display:none;
+}
+.edit_control{
+    align-items: flex-start;
+background-color:
+#ffce26;
+border-radius:
+4px;
+color:
+#ffffff;
+display:
+inline-block;
+font-family:
+Poppins;
+line-height:
+24px;
+padding:
+6px 12px;
+text-align:
+center;
+transition: 0.5s;
+}
+.edit_control:hover{
+    cursor: pointer;
+    background:#a9891b;
+
+}
+.money_hint{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}

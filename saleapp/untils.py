@@ -3,9 +3,10 @@ from flask_login import current_user
 from sqlalchemy import func, and_, desc, or_
 from saleapp import app, db
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 import hashlib
 from sqlalchemy.sql import extract
+from saleapp.encoding import encoding_no1
 
 
 
@@ -28,25 +29,16 @@ def add_user(name, username, password, diachi, queQuan, **kwargs):
 
     db.session.commit()
     taiKhoan = TaiKhoan()
-    print(taiKhoan)
+    # print(taiKhoan)
     db.session.add_all([taiKhoan])
     db.session.commit()
-    print(diachi)
-    print(queQuan)
+    # print(diachi)
+    # print(queQuan)
     user = User(name=name.strip(), username=username, password=password, email=kwargs.get('email'),diachi=diachi, queQuan=queQuan,
-                 avatar=kwargs.get('avatar'), userRole=UserRole.USER,
-                dob=kwargs.get('dob'), idTaiKhoan=taiKhoan.id)
-    # user2 = User(name="Bui Tien Hoang", username="u1",
-    #             password=password,
-    #             avatar='https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/191455455_1236939360069997_5418463114445577817_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=rcajabo0f74AX9qvH8y&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfBoXfETYQ2MJIS8cYaTUQDAix3LXAwX2UK0Vz-P8P1M1w&oe=645FD60B',
-    #             email="20512052047hoang@ou.edu.vn", joined_date=datetime.now(),
-    #             diachi="Gò Vấp", queQuan='Dong Lak', facebook='https://www.facebook.com/d8.ndh',
-    #             dob=datetime.strptime("22-06-1990", '%d-%m-%Y').date(), sex=0, userRole=UserRole.SYSADMIN,
-    #             idtaikhoan=taiKhoan3.id)
-    # print(user2)
-
-
-    db.session.add(user)
+                 dob=kwargs.get('dob'), sdt=kwargs.get('phone'), idtaikhoan = taiKhoan.id)
+    user.name = encoding_no1(user.name)
+    user.email = encoding_no1(user.email)
+    db.session.add_all([user])
 
     db.session.commit()
 
@@ -86,14 +78,14 @@ def load_user_send(room_id):
 def get_chatroom_by_user_id(id):
     id_room = Message.query.filter(Message.user_id.__eq__(id))
 
-    print(id_room)
+    # print(id_room)
     return id_room.first()
 
 
 def get_chatroom_by_room_id(id):
     id_room = Message.query.filter(Message.room_id.__eq__(id))
 
-    print(id_room.first())
+    # print(id_room.first())
     return id_room.first()
 
 
@@ -132,10 +124,12 @@ def check_admin_login(username, password):
 
 
 def get_unreply_room():
-    room = Room.query.filter(Room.is_reply.__eq__(False)) \
-        .order_by(Room.date.desc())
+    # room = Room.query.filter(Room.is_reply.__eq__(False)) \
+    #     .order_by(Room.date.desc())
 
-    return room.all()
+    room = Room.query.all()
+
+    return room
 
 
 def get_user_by_id(user_id):
@@ -162,6 +156,7 @@ def get_tai_khoan_tai_chinh(id_taikhoan):
     taichinh = TaiKhoan.query.filter(TaiKhoan.id.__eq__(id_taikhoan))
 
     return taichinh.first()
+
 
 def get_all_nhom():
     loai = NhomChiTieu.query.all()
@@ -206,10 +201,12 @@ def get_all_tien_tuan_truoc_va_tuan_nay(idtaikhoan):
     taikhoanchitieutuantruoc = []
 
     for i in khoanchitieutuannay:
-        taikhoanchitieutuannay.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu).first())
+        taikhoanchitieutuannay.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).first())
 
     for i in khoanchitieutuantruoc:
-        taikhoanchitieutuantruoc.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu).first())
+        taikhoanchitieutuantruoc.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).first())
 
     tongtienchituannay = 0
     tongtienchituantruoc = 0
@@ -235,10 +232,12 @@ def get_all_tien_thang_truoc_va_thang_nay(idtaikhoan):
     taikhoanchitieutuantruoc = []
 
     for i in khoanchitieutuannay:
-        taikhoanchitieutuannay.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu).first())
+        taikhoanchitieutuannay.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).first())
 
     for i in khoanchitieutuantruoc:
-        taikhoanchitieutuantruoc.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu).first())
+        taikhoanchitieutuantruoc.append(TaiKhoanChiTieu.query.filter(i.id == TaiKhoanChiTieu.idkhoanchitieu,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).first())
 
     tongtienchituannay = 0
     tongtienchituantruoc = 0
@@ -253,3 +252,160 @@ def get_all_tien_thang_truoc_va_thang_nay(idtaikhoan):
 
     return [tongtienchituantruoc, tongtienchituannay]
 
+def get_top_loai_chi_tieu(idUser):
+    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == idUser,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).all()
+
+    my_list = [x.idkhoanchitieu for x in taikhoanchitieu]
+
+    # khoanchiteu = KhoanChiTieu.query.filter(KhoanChiTieu.id.in_(my_list)).all()
+
+    loaichitieu = db.session.query(KhoanChiTieu.idLoaiChiTieu, db.func.count(KhoanChiTieu.id).label('soluong'))\
+                    .filter(KhoanChiTieu.id.in_(my_list))\
+                    .group_by(KhoanChiTieu.idLoaiChiTieu)\
+                    .limit(5)
+
+    # print(loaichitieu.all())
+
+    return loaichitieu.all()
+
+
+def get_ten_loai_theo_id_loai(idLoai):
+
+    loai = LoaiChiTieu.query.filter(LoaiChiTieu.id == idLoai)
+
+    return loai.first()
+
+
+def get_tong_tien_theo_id_loai(idLoai):
+
+    id = KhoanChiTieu.query.filter(KhoanChiTieu.idLoaiChiTieu == idLoai).all()
+
+    list_id = []
+
+    for i in id:
+        list_id.append(i.id)
+
+    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idkhoanchitieu.in_(list_id),
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).all()
+
+    sotien = 0
+
+    for i in taikhoanchitieu:
+        sotien = sotien + i.tienChi
+
+    return sotien
+
+def sort_ten_tongtien(ten, tongtien):
+
+    for i in range(len(tongtien)):
+        for j in range(i + 1, len(tongtien)):
+            if tongtien[j] > tongtien[i]:
+                temp = tongtien[i]
+                tongtien[i] = tongtien[j]
+                tongtien[j] = temp
+                temp = ten[i]
+                ten[i] = ten[j]
+                ten[j] = temp
+
+    return [ten, tongtien]
+
+def get_tien_by_idkhoanchitieu(id):
+
+    return TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idkhoanchitieu == id,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).first().tienChi
+def get_top_chi_tieu_gan_day(user_id):
+
+    chitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == user_id,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False)).all()
+
+    id_chitieu = []
+
+    for i in chitieu:
+        id_chitieu.append(i.idkhoanchitieu)
+
+    # print(id_chitieu)
+
+    chitieuganday = KhoanChiTieu.query.filter(KhoanChiTieu.id.in_(id_chitieu))\
+                    .order_by(KhoanChiTieu.ngayChiTieu.desc()).limit(5).all()
+
+    ten = []
+    time = []
+    tien = []
+
+
+    for i in chitieuganday:
+        ten.append(i.name)
+        time.append(i.ngayChiTieu)
+        tien.append(get_tien_by_idkhoanchitieu(i.id))
+
+    # print(ten)
+
+
+    return [ten, time, tien]
+
+def get_ten_chi_tieu_va_tien(idTaiKhoan):
+
+    today = datetime.now() - timedelta(days=1)
+    nextday = today + timedelta(days=1)
+    taikhoanchitieu = TaiKhoanChiTieu.query.filter(TaiKhoanChiTieu.idtaikhoan == idTaiKhoan,
+                                                                   TaiKhoanChiTieu.isRecoment.__eq__(False))
+
+    list_tien = []
+    list_ten = []
+
+
+    for i in taikhoanchitieu:
+        ten = KhoanChiTieu.query\
+            .filter(KhoanChiTieu.id == i.idkhoanchitieu, KhoanChiTieu.ngayChiTieu.between(today, nextday)).first()
+        if ten:
+            list_ten.append(ten.name)
+            list_tien.append(i.tienChi)
+
+    # print(list_ten, list_tien)
+
+    return [list_ten, list_tien]
+
+
+def add_tien(idTaiKhoan, tien):
+    taikhoan = TaiKhoan.query.filter(TaiKhoan.id == idTaiKhoan).first()
+
+
+    taikhoan.soTien = taikhoan.soTien + tien
+    db.session.commit()
+
+    return True
+
+def get_all_nhom_va_loai_chi_tieu():
+
+    nhom = db.session.query(LoaiChiTieu.name.label('tenloai'), LoaiChiTieu.image, NhomChiTieu.name.label('tennhom'))\
+            .join(LoaiChiTieu, NhomChiTieu.id == LoaiChiTieu.idnhomchitieu)\
+            .order_by(NhomChiTieu.id).all()
+
+    print(nhom)
+
+    return nhom
+
+def get_loai_chi_tieu_theo_nhom_id(nhomid):
+
+    loaichitieu = LoaiChiTieu.query.filter(LoaiChiTieu.idnhomchitieu == nhomid).all()
+
+    return loaichitieu
+
+def get_all_loai():
+    loai = LoaiChiTieu.query.all()
+
+    return loai
+
+def change_info(user_id, sdt, diachi):
+    user = get_user_by_id(user_id)
+
+    user.sdt = sdt
+    user.diachi = diachi
+
+    db.session.commit()
+
+    return 1;
+
+# def summary(text):
+#     return summarizer(text, max_length=200, min_length=20, do_sample=False)[0]['summary_text']
