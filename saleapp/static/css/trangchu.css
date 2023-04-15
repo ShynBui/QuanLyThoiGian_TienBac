@@ -65,9 +65,8 @@ button:hover {
 }
 
 /* === Header === */
-header {
-  position: absolute;
-  width: 100%;
+header{
+    height:83px;
 }
 
 .navbar {
@@ -427,7 +426,7 @@ header {
 #footer {
   overflow: hidden;
   position: relative;
-  height: 100vh;
+  height: 65vh;
   display: flex;
   align-items: center;
 }

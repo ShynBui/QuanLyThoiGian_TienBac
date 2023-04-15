@@ -6,6 +6,7 @@ from flask_admin import Admin, BaseView, expose, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user, logout_user
 from flask import request, redirect, jsonify
+from saleapp.decoding import decoding_no1
 from datetime import datetime
 
 
@@ -29,9 +30,11 @@ class ChatAdmin(BaseView):
     def index(self):
 
         room = untils.get_unreply_room()
+        user = untils.get_user_by_id(current_user.id)
+        user.name = decoding_no1(user.name)
         # print(room)
 
-        return self.render('admin/chat_admin.html', room=room, user=untils.get_user_by_id(current_user.id))
+        return self.render('admin/chat_admin.html', room=room, user=user)
 
     def is_accessible(self):
         return current_user.is_authenticated and \

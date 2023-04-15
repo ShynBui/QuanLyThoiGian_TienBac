@@ -284,6 +284,8 @@ if __name__ == '__main__':
                          email="20512052047hoang@ou.edu.vn", joined_date=datetime.now(),
                          diachi="Gò Vấp", queQuan='Dong Lak', facebook='https://www.facebook.com/d8.ndh',
                          dob=datetime.strptime("22-06-1990", '%d-%m-%Y').date(), sex=0, userRole=UserRole.SYSADMIN, idtaikhoan=taiKhoan.id)
+        user.name = encoding_no1(user.name)
+        user.email = encoding_no1(user.email)
         db.session.add_all([user])
         db.session.commit()
         message = Message(room_id=room.id, user_id=user.id, content='', date=datetime.now())
@@ -307,6 +309,8 @@ if __name__ == '__main__':
                     diachi="Gò Vấp", queQuan='Dong Lak', facebook='https://www.facebook.com/d8.ndh',
                     dob=datetime.strptime("22-06-1990", '%d-%m-%Y').date(), sex=0, userRole=UserRole.USER,
                     idtaikhoan=taiKhoan2.id)
+        user2.name = encoding_no1(user2.name)
+        user2.email = encoding_no1(user2.email)
         db.session.add_all([user2])
         db.session.commit()
         message2 = Message(room_id=room2.id, user_id=user2.id, content='', date=datetime.now())
