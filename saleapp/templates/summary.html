@@ -14,11 +14,11 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <div class=" contact">
-    <h1 class="question_answering">QUESTION <span>ANSWERING</span></h1>
+    <h1 style="display: flex; justify-content:center; color:red" class="question_answering">Summary <span></span></h1>
     <div class="row sub_row">
         <div class="col-md-3">
             <div class="contact-info">
-                <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/>
+                <img style="border-radius:50%" src="{{ url_for('static', filename='image/codehero.jpg') }}" alt="image"/>
                 <h5>Summary: {{summary}}</h5>
             </div>
         </div>

@@ -2,17 +2,39 @@
 
 {% block title %} Tin tức {% endblock %}
 
-{% block content %}
-
+{% block css %}
+<style>
+    .card {
+        text-decoration: none;
+    }
+</style>
 {% endblock %}
 
-{% block script %}
-<script>
-    let listArticle = [];
-
-    {% for i in article %}
-        listArticle.push('{{i}}');
-    {% endfor %}
-    console.log(listArticle);
-</script>
+{% block content %}
+<div class="row mb-3 justify-content-around">
+    <div class="col-md-4">
+        <a class="card" style="width: 18rem;" href="https://www.cnbc.com/2023/04/13/stock-market-today-live-updates.html">
+            <img src="https://image.cnbcfm.com/api/v1/image/107225778-1681502945677-aab_img_100_99_112_1877665_1000-1681502861360.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Dow sheds more than 100 points Friday, but notches fourth straight positive week</h5>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a class="card" style="width: 18rem;" href="https://www.cnbc.com/2023/04/13/stock-market-today-live-updates.html">
+            <img src="https://image.cnbcfm.com/api/v1/image/107225778-1681502945677-aab_img_100_99_112_1877665_1000-1681502861360.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Dow sheds more than 100 points Friday, but notches fourth straight positive week</h5>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a class="card" style="width: 18rem;" href="https://www.cnbc.com/2023/04/13/stock-market-today-live-updates.html">
+            <img src="https://image.cnbcfm.com/api/v1/image/107225778-1681502945677-aab_img_100_99_112_1877665_1000-1681502861360.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Dow sheds more than 100 points Friday, but notches fourth straight positive week</h5>
+            </div>
+        </a>
+    </div>
+</div>
 {% endblock %}

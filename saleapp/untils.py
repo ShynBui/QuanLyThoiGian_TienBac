@@ -1,7 +1,7 @@
 from saleapp.models import User, UserRole, Room, Message, TaiKhoan, LoaiChiTieu, NhomChiTieu, TaiKhoanChiTieu, KhoanChiTieu
 from flask_login import current_user
 from sqlalchemy import func, and_, desc, or_
-from saleapp import app, db
+from saleapp import app, db, summarizer
 import json
 from datetime import datetime, timedelta
 import hashlib
@@ -407,5 +407,5 @@ def change_info(user_id, sdt, diachi):
 
     return 1;
 
-# def summary(text):
-#     return summarizer(text, max_length=200, min_length=20, do_sample=False)[0]['summary_text']
+def summary(text):
+    return summarizer(text, max_length=200, min_length=20, do_sample=False)[0]['summary_text']

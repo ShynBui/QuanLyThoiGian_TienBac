@@ -474,10 +474,9 @@ def summary():
 #     response = chatbot.get_response(msg)
 #     return str(response)
 
-@app.route('/rss', methods=['get'])
-def getRSS():
-    feed = feedparser.parse('https://mof.gov.vn/webcenter/rss?muchienthiId=1908')
-    return render_template('tintuc.html', article=feed['entries'])
+@app.route('/tintuc', methods=['get'])
+def tintuc():
+    return render_template('tintuc.html')
 
 
 @app.route('/calendar', methods=['GET'])

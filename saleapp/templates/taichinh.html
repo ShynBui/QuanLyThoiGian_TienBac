@@ -34,7 +34,7 @@
                 <a href="{{url_for('chitieuhangthang')}}" class="btn-download btn-dow1"
                    style="background:#e1c980; color:black">
                     <i class='bx bxs-report'></i>
-                    <span class="text">Thêm chi tiêu hàng tháng</span>
+                    <span class="text">Tổng quan chi tiêu </span>
                 </a>
                 <a href="{{url_for('giaodich')}}" class="btn-download btn-dow1" style="background:#e1c980; color:black">
                     <i class='bx bxs-report'></i>
@@ -144,7 +144,7 @@
                     {%for i in range(n2)%}
                     <tr>
                         <td>
-                            <img src="img/people.png">
+                            <img src="{{ url_for('static', filename='image/codehero.jpg') }}">
                             <p>{{ten2[i]}}</p>
                         </td>
                         <td>{{time2[i]}}</td>
